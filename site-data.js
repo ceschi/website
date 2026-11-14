@@ -51,6 +51,10 @@ text: {
  dataNoteLinkLabel: "Wharton Research Data Services",
  dataNoteLinkUrl: "https://wrds-web.wharton.upenn.edu/wrds/",
  dataNoteAfter: ", you get bulk access to most of them.",
+ // Section titles on the Resources page.
+ dataTitle: "Data",
+ codesTitle: "Code",
+ blogsTitle: "Blogs",
  codesIntro: "Shared for reproducibility. I prefer free languages: R, Python, Julia.",
  cvTitle: "Curriculum vitae",
  cvDownload: "Download PDF",

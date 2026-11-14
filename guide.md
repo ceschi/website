@@ -66,9 +66,10 @@ Block `text: { ... }` near the top. Each line is one piece of text:
 | `homeTagline` | Large sentence next to the portrait |
 | `homeBio` | Paragraph under the tagline |
 | `homeDisclaimer` | Italic paragraph under the bio |
-| `dataIntro` | Short text under "Data sources" |
+| `dataTitle`, `codesTitle`, `blogsTitle` | Titles of the three Resources sections |
+| `dataIntro` | Short text under the Data title |
 | `dataNoteBefore`, `dataNoteLinkLabel`, `dataNoteLinkUrl`, `dataNoteAfter` | Note at the bottom of Data sources. The sentence is `before` + link + `after`; the link is the label with its URL. |
-| `codesIntro` | Short text under "Code & datasets" |
+| `codesIntro` | Short text under the Code title |
 | `blogsIntro` | Short text under "Blogs & reading" |
 
 The `updated:` line at the top sets the "Updated" date in the footer. Change it by hand when you publish an update.
