@@ -80,14 +80,13 @@ Entries live in `research:`, in five groups: `pub` (Publications), `policy` (Pol
 ```js
 {year:'2022', topics:['Inflation'], title:'Paper title', url:'papers/paper.pdf',
  venue:'Journal name', with:'A. Coauthor and B. Coauthor',
- summary:'One or two sentences shown under the title.',
  abstract:'Full abstract, shown when clicking "Abstract +".',
  links:[{label:'Slides', url:'papers/slides.pdf'}]},
 ```
 
 All fields except `title` are optional. Leave a field out and it does not appear.
 
-- Edit the description of an entry: change `summary` (short text) and `abstract` (long text).
+- Edit the description of an entry: change `abstract`.
 - Add an entry: copy a whole line inside the right group, paste it under another entry of that group, change the text.
 - Years: `year:''` shows a dash.
 - Topics: the filter buttons come from the `topics:[...]` list near the top. To add a topic, add it there and then use the same spelling in each entry's `topics`.
