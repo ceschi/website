@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./vendor/react.production.min.js"></script>
+<script src="./vendor/react-dom.production.min.js"></script>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<script src="./site-data.js"></script>
+<script src="./build-info.js"></script>
+<style>
+@font-face{font-family:'Inter';font-style:normal;font-display:swap;font-weight:100 900;src:url(./fonts/inter-latin-ext-wght-normal.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:'Inter';font-style:normal;font-display:swap;font-weight:100 900;src:url(./fonts/inter-latin-wght-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+body{margin:0;font-family:'Inter',system-ui,sans-serif;-webkit-font-smoothing:antialiased;font-variant-numeric:tabular-nums}
+:root,[data-theme="dark"]{--ecb:#3F63D6;--bg:#0D0F13;--ink:#EDEBE6;--muted:#A6A9B1;--rule:#2C3038;--soft:#D4D6DB;--link:#8FA8F0;--line:#353942;--footer:#0A0B0E;--navbg:rgba(13,15,19,0.8);--surface:#171A21}
+[data-theme="light"]{--ecb:#003299;--bg:#F6F5F1;--ink:#15171C;--muted:#62656E;--rule:#E0DED8;--soft:#3A3D45;--link:#003299;--line:#CFCCC4;--footer:#EEECE7;--navbg:rgba(246,245,241,0.84);--surface:#FFFFFF}
+a{color:var(--link);text-decoration:none}
+a:hover{color:var(--ink)}
+::selection{background:#003299;color:#FFFFFF}
+</style>
+</helmet>
+<div data-theme="{{ theme }}" style="min-height:100vh;display:flex;flex-direction:column;background:var(--bg);color:var(--ink);transition:background .3s,color .3s">
+
+<nav style="position:sticky;top:0;z-index:20;background:var(--navbg);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid var(--rule)">
+  <div style="max-width:1240px;margin:0 auto;padding:14px clamp(18px,5vw,32px);display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap">
+    <a href="#home" onClick="{{ goHome }}" style="font-family:'Inter',system-ui,sans-serif;font-weight:500;font-size:25px;line-height:1;color:var(--ink);letter-spacing:-0.01em">Emanuele Franceschi</a>
+    <div style="display:flex;gap:2px;align-items:center;overflow-x:auto;max-width:100%;scrollbar-width:none">
+      <sc-for list="{{ nav }}" as="n" hint-placeholder-count="4">
+        <a href="{{ n.href }}" onClick="{{ n.go }}" style="{{ n.style }}">{{ n.label }}</a>
+      </sc-for>
+      <button onClick="{{ toggleTheme }}" aria-label="Toggle dark mode" style="margin-left:8px;flex:none;width:34px;height:34px;border:1px solid var(--line);border-radius:50%;background:transparent;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0" style-hover="border-color:var(--ink)"><span style="width:14px;height:14px;border-radius:50%;border:1.5px solid var(--ink);background:linear-gradient(90deg,var(--ink) 50%,transparent 50%);display:block"></span></button>
+    </div>
+  </div>
+</nav>
+
+<sc-if value="{{ isHome }}" hint-placeholder-val="{{ true }}">
+  <header style="position:relative;height:min(84vh,820px);min-height:440px;overflow:hidden">
+    <img src="./assets/sat-coast.jpg" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:{{ pos.home }};display:block">
+    <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(8,10,14,0) 40%,rgba(8,10,14,0.4) 70%,rgba(8,10,14,0.72) 100%);pointer-events:none"></div>
+    <div style="position:absolute;left:0;right:0;bottom:0;pointer-events:none">
+      <div style="max-width:1240px;margin:0 auto;padding:0 clamp(18px,5vw,32px) 48px;display:flex;flex-direction:column;gap:14px">
+        <h1 style="margin:0;font-family:'Inter',system-ui,sans-serif;font-weight:500;font-size:clamp(56px,9vw,120px);line-height:0.92;letter-spacing:-0.03em;color:#F4F2EE;text-shadow:0 2px 24px rgba(0,0,0,0.45);text-wrap:balance">Emanuele Franceschi</h1>
+        <span style="font-family:'Inter',system-ui,sans-serif;font-weight:500;font-size:clamp(15px,1.6vw,19px);font-weight:500;letter-spacing:0.01em;color:#F4F2EE;text-shadow:0 1px 12px rgba(0,0,0,0.6)">{{ t.homeRole }}</span>
+      </div>
+    </div>
+  </header>
+  <main style="max-width:1240px;width:100%;box-sizing:border-box;margin:0 auto;padding:clamp(40px,7vw,80px) clamp(18px,5vw,32px) 40px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr));gap:clamp(32px,6vw,72px);align-items:center">
+    <div style="width:100%;max-width:440px;aspect-ratio:4/5;overflow:hidden;background:#fff;justify-self:start">
+      <img src="./assets/portrait.jpg" alt="Emanuele Franceschi" style="width:100%;height:100%;object-fit:cover;object-position:{{ pos.portrait }};display:block">
+    </div>
+    <section style="display:flex;flex-direction:column;gap:22px">
+      <p style="margin:0;font-family:'Inter',system-ui,sans-serif;font-weight:500;font-size:clamp(34px,4.2vw,54px);line-height:1.05;letter-spacing:-0.015em;text-wrap:balance">{{ t.homeTagline }}</p>
+      <p style="margin:0;font-size:clamp(18px,1.7vw,21.5px);line-height:1.6;color:var(--soft);max-width:54ch;text-wrap:pretty">{{ t.homeBio }}</p>
+      <p style="margin:0;font-size:clamp(18px,1.7vw,21.5px);line-height:1.6;font-style:italic;color:var(--muted);max-width:54ch;text-wrap:pretty">{{ t.homeDisclaimer }}</p>
+      <div style="display:flex;gap:10px 22px;flex-wrap:wrap;font-size:14px;font-weight:500">
+        <sc-for list="{{ homeLinks }}" as="l" hint-placeholder-count="4">
+          <a href="{{ l.url }}" target="{{ l.target }}" onClick="{{ l.go }}" style="color:var(--ink);border-bottom:1px solid var(--line);padding-bottom:3px" style-hover="border-color:var(--link);color:var(--ink)">{{ l.label }}</a>
+        </sc-for>
+      </div>
+    </section>
+  </main>
+  <section style="max-width:1240px;width:100%;box-sizing:border-box;margin:0 auto;padding:40px clamp(18px,5vw,32px) 96px;display:flex;flex-direction:column;gap:18px">
+    <div style="display:flex;justify-content:space-between;align-items:baseline;padding-bottom:14px;border-bottom:1px solid var(--ink)">
+      <span style="font-family:'Inter',system-ui,sans-serif;font-weight:500;font-size:12px;letter-spacing:0.14em;text-transform:uppercase;border-left:3px solid var(--ecb);padding-left:10px">Latest work</span>
+      <a href="#research" onClick="{{ goResearch }}" style="font-size:13px">All research →</a>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,250px),1fr));gap:12px">
+      <sc-for list="{{ latest }}" as="it" hint-placeholder-count="4">
+        <a href="{{ it.url }}" target="_blank" style="display:flex;flex-direction:column;gap:12px;padding:20px;background:var(--surface);border:1px solid var(--rule);color:var(--ink);transition:border-color .2s,transform .2s" style-hover="border-color:var(--link);transform:translateY(-2px);color:var(--ink)">
+          <span style="font-family:'Inter',system-ui,sans-serif;font-weight:500;font-size:12px;color:var(--muted)">{{ it.year }} · {{ it.kind }}</span>
+          <span style="font-family:'Inter',system-ui,sans-serif;font-weight:500;font-size:22px;line-height:1.15;text-wrap:pretty">{{ it.title }}</span>
+          <span style="margin-top:auto;font-size:13px;color:var(--muted);line-height:1.45">{{ it.venue }}</span>
+        </a>
+      </sc-for>
+    </div>
+  </section>
+</sc-if>
+
+<sc-if value="{{ isResearch }}" hint-placeholder-val="{{ false }}">
+  <header style="position:relative;height:min(58vh,560px);min-height:320px;overflow:hidden">
+    <img src="./assets/lighthouse.jpg" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:{{ pos.research }};display:block">
+    <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(8,10,14,0) 35%,rgba(8,10,14,0.4) 68%,rgba(8,10,14,0.72) 100%);pointer-events:none"></div>
+    <div style="position:absolute;left:0;right:0;bottom:0;pointer-events:none">
+      <div style="max-width:1240px;margin:0 auto;padding:0 clamp(18px,5vw,32px) 40px;display:flex;flex-direction:column;gap:10px">
+        <h1 style="margin:0;font-family:'Inter',system-ui,sans-serif;font-weight:500;font-size:clamp(56px,8vw,112px);line-height:0.9;letter-spacing:-0.03em;color:#F4F2EE;text-shadow:0 2px 24px rgba(0,0,0,0.45)">Research</h1>
+      </div>
+    </div>
+  </header>
+  <main style="max-width:1240px;width:100%;box-sizing:border-box;margin:0 auto;padding:40px clamp(18px,5vw,32px) 96px;display:flex;flex-direction:column;gap:48px">
+    <div style="padding:0 0 14px;border-bottom:1px solid var(--rule);display:flex;flex-direction:column;gap:6px">
+      <div style="display:flex;gap:2px 18px;align-items:baseline">
+        <span style="font-family:'Inter',system-ui,sans-serif;font-weight:500;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);min-width:56px">Type</span>
+        <div style="flex:1 1 0;min-width:0;display:flex;gap:2px 18px;flex-wrap:wrap;align-items:baseline">
+        <sc-for list="{{ typeChips }}" as="f" hint-placeholder-count="5"><button onClick="{{ f.go }}" aria-pressed="{{ f.on }}" style="{{ f.style }}">{{ f.label }}</button></sc-for>
+        </div>
+      </div>
+      <div style="display:flex;gap:2px 18px;align-items:baseline">
+        <span style="font-family:'Inter',system-ui,sans-serif;font-weight:500;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);min-width:56px">Topic</span>
+        <div style="flex:1 1 0;min-width:0;display:flex;gap:2px 18px;flex-wrap:wrap;align-items:baseline">
+        <sc-for list="{{ topicChips }}" as="f" hint-placeholder-count="5"><button onClick="{{ f.go }}" aria-pressed="{{ f.on }}" style="{{ f.style }}">{{ f.label }}</button></sc-for>
+        </div>
+      </div>
+    </div>
+    <sc-if value="{{ noResults }}" hint-placeholder-val="{{ false }}">
+      <p style="margin:0;font-size:16px;color:var(--muted)">Nothing matches this combination. <button onClick="{{ resetFilters }}" style="font:inherit;color:var(--link);background:none;border:0;padding:0;cursor:pointer">Reset filters</button></p>
+    </sc-if>
+    <sc-for list="{{ sections }}" as="sec" hint-placeholder-count="3">
+      <section style="display:flex;flex-wrap:wrap;gap:20px 56px;border-top:1px solid var(--ink);padding-top:22px">
+        <div style="flex:1 1 200px;display:flex;flex-direction:column;gap:6px">
+          <h2 style="margin:0;font-family:'Inter',system-ui,sans-serif;font-weight:500;font-size:34px;line-height:1"><span style="width:32px;height:3px;background:var(--ecb);display:block;margin-bottom:12px"></span>{{ sec.title }}</h2>
+        </div>
+        <div style="flex:999 1 520px;min-width:0;display:flex;flex-direction:column;min-width:0">
+          <sc-for list="{{ sec.groups }}" as="g" hint-placeholder-count="1">
+          <div style="display:flex;flex-direction:column;min-width:0">
+          <sc-if value="{{ g.label }}" hint-placeholder-val="{{ false }}"><h3 style="margin:0 0 20px;font-family:'Inter',system-ui,sans-serif;font-weight:500;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted)">{{ g.label }}</h3></sc-if>
+          <sc-for list="{{ g.items }}" as="it" hint-placeholder-count="2">
+            <article style="display:grid;grid-template-columns:{{ artCols }};gap:16px 28px;padding:0 0 26px;margin-bottom:24px;border-bottom:1px solid var(--rule)">
+              <span style="font-family:'Inter',system-ui,sans-serif;font-weight:500;font-size:12.5px;color:var(--link);padding-top:6px">{{ it.yearLabel }}</span>
+              <div style="display:flex;flex-direction:column;gap:10px;min-width:0">
+                <sc-if value="{{ it.url }}" hint-placeholder-val="{{ true }}">
+                  <a href="{{ it.url }}" target="_blank" style="font-family:'Inter',system-ui,sans-serif;font-weight:500;font-size:27px;line-height:1.1;color:var(--ink);text-wrap:pretty" style-hover="color:var(--link)">{{ it.title }}</a>
+                </sc-if>
+                <sc-if value="{{ it.noUrl }}" hint-placeholder-val="{{ false }}">
+                  <span style="font-family:'Inter',system-ui,sans-serif;font-weight:500;font-size:27px;line-height:1.1;text-wrap:pretty">{{ it.title }}</span>
+                </sc-if>
+                <div style="display:flex;gap:4px 14px;flex-wrap:wrap;font-size:16px;color:var(--muted);line-height:1.5;align-items:center">
+                  <sc-if value="{{ it.venue }}" hint-placeholder-val="{{ true }}"><span style="color:var(--soft)">{{ it.venue }}</span></sc-if>
+                  <sc-if value="{{ it.with }}" hint-placeholder-val="{{ true }}"><span>with {{ it.with }}</span></sc-if>
+                </div>
+                <sc-if value="{{ it.summary }}" hint-placeholder-val="{{ true }}">
+                  <p style="margin:0;font-size:16px;line-height:1.55;color:var(--soft);max-width:62ch;text-wrap:pretty">{{ it.summary }}</p>
+                </sc-if>
+                <div style="display:flex;gap:16px;flex-wrap:wrap;align-items:center;font-size:13px;font-weight:500">
+                  <sc-if value="{{ it.abstract }}" hint-placeholder-val="{{ true }}">
+                    <button onClick="{{ it.toggle }}" style="font:500 13px 'Inter',system-ui,sans-serif;padding:0 0 2px;border:0;border-bottom:1px solid var(--line);background:none;color:var(--ink);cursor:pointer" style-hover="border-color:var(--link)">{{ it.toggleLabel }}</button>
+                  </sc-if>
+                  <sc-for list="{{ it.links }}" as="l" hint-placeholder-count="0">
+                    <a href="{{ l.url }}" target="_blank" style="color:var(--link)">{{ l.label }} ↗</a>
+                  </sc-for>
+                </div>
+                <sc-if value="{{ it.open }}" hint-placeholder-val="{{ false }}">
+                  <p style="margin:6px 0 0;padding-left:16px;border-left:2px solid var(--ecb);font-size:15px;line-height:1.7;color:var(--soft);max-width:70ch;text-wrap:pretty">{{ it.abstract }}</p>
+                </sc-if>
+              </div>
+              <sc-if value="{{ showCharts }}" hint-placeholder-val="{{ true }}">
+                <a href="{{ it.chartUrl }}" target="_blank" aria-label="Open chart" style="{{ chartCell }}" style-hover="border-color:var(--ecb)">
+                  <img src="{{ it.chartUrl }}" onError="{{ chartFail }}" alt="Chart: {{ it.title }}" loading="lazy" style="display:block;width:100%;aspect-ratio:4/3;object-fit:contain">
+                </a>
+              </sc-if>
+            </article>
+          </sc-for>
+          </div>
+          </sc-for>
+        </div>
+      </section>
+    </sc-for>
+  </main>
+</sc-if>
+
+<sc-if value="{{ isResources }}" hint-placeholder-val="{{ false }}">
+  <header style="position:relative;height:min(58vh,560px);min-height:320px;overflow:hidden">
+    <img src="./assets/cranes.jpg" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:{{ pos.resources }};display:block">
+    <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(8,10,14,0) 35%,rgba(8,10,14,0.4) 68%,rgba(8,10,14,0.72) 100%);pointer-events:none"></div>
+    <div style="position:absolute;left:0;right:0;bottom:0;pointer-events:none">
+      <div style="max-width:1240px;margin:0 auto;padding:0 clamp(18px,5vw,32px) 40px;display:flex;flex-direction:column;gap:10px">
+        <h1 style="margin:0;font-family:'Inter',system-ui,sans-serif;font-weight:500;font-size:clamp(56px,8vw,112px);line-height:0.9;letter-spacing:-0.03em;color:#F4F2EE;text-shadow:0 2px 24px rgba(0,0,0,0.45)">Resources</h1>
+      </div>
+    </div>
+  </header>
+  <main style="max-width:1240px;width:100%;box-sizing:border-box;margin:0 auto;padding:48px clamp(18px,5vw,32px) 96px;display:grid;grid-template-columns:{{ cols }};gap:56px clamp(32px,4vw,56px);align-items:start">
+      <sc-if value="{{ showData }}" hint-placeholder-val="{{ true }}">
+        <section style="border-top:1px solid var(--ink);padding-top:22px;display:flex;flex-direction:column;gap:20px">
+          <h2 style="margin:0;font-family:'Inter',system-ui,sans-serif;font-weight:500;font-size:34px;line-height:1"><span style="width:32px;height:3px;background:var(--ecb);display:block;margin-bottom:12px"></span><button onClick="{{ toggleData }}" aria-expanded="{{ expData }}" tabindex="{{ tabIdx }}" style="{{ hdr }}"><span>Data sources</span><span aria-hidden="true" style="font-family:'Inter',system-ui,sans-serif;font-weight:500;font-size:20px;color:var(--link)">{{ indData }}</span></button></h2>
+          <sc-if value="{{ openData }}" hint-placeholder-val="{{ true }}">
+            <p style="margin:0;font-size:14px;line-height:1.6;color:var(--muted);max-width:62ch">{{ t.dataIntro }}</p>
+            <div style="min-width:0;display:flex;flex-direction:column">
+              <sc-for list="{{ data }}" as="d" hint-placeholder-count="8">
+                <a href="{{ d.url }}" target="_blank" style="display:flex;flex-direction:column;gap:5px;padding:16px 0;border-bottom:1px solid var(--rule);color:var(--ink)" style-hover="color:var(--link)">
+                  <span style="display:flex;justify-content:space-between;gap:12px;font-weight:500;font-size:15.5px">{{ d.name }}<span style="color:var(--link)">↗</span></span>
+                  <span style="font-size:14px;line-height:1.5;color:var(--muted);text-wrap:pretty">{{ d.desc }}</span>
+                </a>
+              </sc-for>
+              <p style="grid-column:1/-1;margin:20px 0 0;font-size:14px;line-height:1.7;color:var(--muted);max-width:76ch;text-wrap:pretty">{{ t.dataNoteBefore }}<a href="{{ t.dataNoteLinkUrl }}" target="_blank">{{ t.dataNoteLinkLabel }}</a>{{ t.dataNoteAfter }}</p>
+            </div>
+          </sc-if>
+        </section>
+      </sc-if>
+      <sc-if value="{{ showCodes }}" hint-placeholder-val="{{ true }}">
+        <section style="border-top:1px solid var(--ink);padding-top:22px;display:flex;flex-direction:column;gap:20px">
+          <h2 style="margin:0;font-family:'Inter',system-ui,sans-serif;font-weight:500;font-size:34px;line-height:1"><span style="width:32px;height:3px;background:var(--ecb);display:block;margin-bottom:12px"></span><button onClick="{{ toggleCodes }}" aria-expanded="{{ expCodes }}" tabindex="{{ tabIdx }}" style="{{ hdr }}"><span>Code &amp; datasets</span><span aria-hidden="true" style="font-family:'Inter',system-ui,sans-serif;font-weight:500;font-size:20px;color:var(--link)">{{ indCodes }}</span></button></h2>
+          <sc-if value="{{ openCodes }}" hint-placeholder-val="{{ true }}">
+            <p style="margin:0;font-size:14px;line-height:1.6;color:var(--muted);max-width:62ch">{{ t.codesIntro }}</p>
+            <div style="min-width:0;display:flex;flex-direction:column">
+              <sc-for list="{{ codes }}" as="c" hint-placeholder-count="4">
+                <a href="{{ c.url }}" target="_blank" style="display:flex;flex-direction:column;gap:6px;padding:18px 0;border-bottom:1px solid var(--rule);color:var(--ink)" style-hover="color:var(--link)">
+                  <span style="font-family:'Inter',system-ui,sans-serif;font-weight:500;font-size:11.5px;letter-spacing:0.06em;text-transform:uppercase;color:var(--muted)">{{ c.tag }}</span>
+                  <span style="font-family:'Inter',system-ui,sans-serif;font-weight:500;font-size:17px">{{ c.name }}</span>
+                  <span style="font-size:14px;line-height:1.5;color:var(--muted)">{{ c.desc }}</span>
+                </a>
+              </sc-for>
+            </div>
+          </sc-if>
+        </section>
+      </sc-if>
+    <sc-if value="{{ showBlogs }}" hint-placeholder-val="{{ true }}">
+      <aside style="flex:1 1 280px;min-width:0;border-top:1px solid var(--ink);padding-top:22px;display:flex;flex-direction:column;gap:20px">
+        <h2 style="margin:0;font-family:'Inter',system-ui,sans-serif;font-weight:500;font-size:34px;line-height:1"><span style="width:32px;height:3px;background:var(--ecb);display:block;margin-bottom:12px"></span><button onClick="{{ toggleBlogs }}" aria-expanded="{{ expBlogs }}" tabindex="{{ tabIdx }}" style="{{ hdr }}"><span>Blogs &amp; reading</span><span aria-hidden="true" style="font-family:'Inter',system-ui,sans-serif;font-weight:500;font-size:20px;color:var(--link)">{{ indBlogs }}</span></button></h2>
+        <sc-if value="{{ openBlogs }}" hint-placeholder-val="{{ true }}">
+          <p style="margin:0;font-size:14px;line-height:1.6;color:var(--muted);text-wrap:pretty">{{ t.blogsIntro }}</p>
+          <div style="display:flex;flex-direction:column">
+            <sc-for list="{{ blogs }}" as="b" hint-placeholder-count="12">
+              <a href="{{ b.url }}" target="_blank" style="display:flex;flex-direction:column;gap:3px;padding:12px 0;border-bottom:1px solid var(--rule);color:var(--ink)" style-hover="color:var(--link)">
+                <span style="display:flex;justify-content:space-between;gap:12px;font-weight:500;font-size:15px">{{ b.name }}<span style="color:var(--link)">↗</span></span>
+                <span style="font-size:13.5px;line-height:1.45;color:var(--muted)">{{ b.note }}</span>
+              </a>
+            </sc-for>
+          </div>
+        </sc-if>
+      </aside>
+    </sc-if>
+  </main>
+</sc-if>
+
+<sc-if value="{{ isCv }}" hint-placeholder-val="{{ false }}">
+  <main style="max-width:1000px;width:100%;box-sizing:border-box;margin:0 auto;padding:clamp(40px,7vw,80px) clamp(18px,5vw,32px) 96px;display:flex;flex-direction:column;gap:24px">
+    <h1 style="margin:0;font-family:'Inter',system-ui,sans-serif;font-weight:500;font-size:clamp(36px,5vw,56px);line-height:1;letter-spacing:-0.03em">{{ t.cvTitle }}</h1>
+    <div style="display:flex;gap:12px 24px;flex-wrap:wrap;align-items:center;font-size:14px;font-weight:500">
+      <a href="{{ cvUrl }}" download style="padding:9px 18px;border:1px solid var(--ink);color:var(--ink)" style-hover="color:var(--link);border-color:var(--link)">{{ t.cvDownload }}</a>
+      <a href="{{ cvUrl }}" target="_blank" style="color:var(--link)">{{ t.cvOpen }} ↗</a>
+    </div>
+    <object data="{{ cvEmbed }}" type="application/pdf" style="display:block;width:100%;height:min(82vh,1100px);min-height:520px;border:1px solid var(--rule);background:var(--surface)">
+      <p style="margin:0;padding:24px;font-size:15px;line-height:1.6;color:var(--soft)">{{ t.cvFallback }}</p>
+    </object>
+  </main>
+</sc-if>
+
+<sc-if value="{{ isPrivacy }}" hint-placeholder-val="{{ false }}">
+  <main style="max-width:820px;width:100%;box-sizing:border-box;margin:0 auto;padding:clamp(40px,7vw,80px) clamp(18px,5vw,32px) 96px;display:flex;flex-direction:column;gap:32px">
+    <div style="display:flex;flex-direction:column;gap:10px">
+      <h1 style="margin:0;font-family:'Inter',system-ui,sans-serif;font-weight:500;font-size:clamp(36px,5vw,56px);line-height:1;letter-spacing:-0.03em">{{ pv.title }}</h1>
+      <p style="margin:0;font-size:14px;color:var(--muted)">{{ pv.updated }}</p>
+    </div>
+    <sc-for list="{{ pv.sections }}" as="s" hint-placeholder-count="5">
+      <section style="display:flex;flex-direction:column;gap:12px;border-top:1px solid var(--rule);padding-top:22px">
+        <h2 style="margin:0;font-family:'Inter',system-ui,sans-serif;font-weight:500;font-size:22px;line-height:1.2">{{ s.h }}</h2>
+        <sc-for list="{{ s.paras }}" as="q" hint-placeholder-count="2">
+          <p style="margin:0;font-size:16px;line-height:1.7;color:var(--soft);text-wrap:pretty">{{ q.t }}</p>
+        </sc-for>
+      </section>
+    </sc-for>
+  </main>
+</sc-if>
+
+<sc-if value="{{ isContacts }}" hint-placeholder-val="{{ false }}">
+  <header style="position:relative;height:min(58vh,560px);min-height:320px;overflow:hidden">
+    <img src="./assets/sat-white.jpg" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:{{ pos.contacts }};display:block">
+    <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(8,10,14,0) 30%,rgba(8,10,14,0.45) 65%,rgba(8,10,14,0.75) 100%);pointer-events:none"></div>
+    <div style="position:absolute;left:0;right:0;bottom:0;pointer-events:none">
+      <div style="max-width:1240px;margin:0 auto;padding:0 clamp(18px,5vw,32px) 40px;display:flex;flex-direction:column;gap:10px">
+        <h1 style="margin:0;font-family:'Inter',system-ui,sans-serif;font-weight:500;font-size:clamp(56px,8vw,112px);line-height:0.9;letter-spacing:-0.03em;color:#F4F2EE;text-shadow:0 2px 24px rgba(0,0,0,0.45)">Get in touch</h1>
+      </div>
+    </div>
+  </header>
+  <main style="max-width:1240px;width:100%;box-sizing:border-box;margin:0 auto;padding:48px clamp(18px,5vw,32px) 96px;display:flex;flex-direction:column">
+    <sc-for list="{{ contacts }}" as="c" hint-placeholder-count="4">
+      <sc-if value="{{ c.isLink }}" hint-placeholder-val="{{ true }}">
+        <a href="{{ c.url }}" target="{{ c.target }}" style="display:grid;grid-template-columns:minmax(90px,200px) minmax(0,1fr) auto;gap:20px;align-items:baseline;padding:22px 0;border-bottom:1px solid var(--rule);color:var(--ink)" style-hover="color:var(--link)">
+          <span style="font-family:'Inter',system-ui,sans-serif;font-weight:500;font-size:12px;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted)">{{ c.label }}</span>
+          <span style="font-family:'Inter',system-ui,sans-serif;font-weight:500;font-size:clamp(24px,3.4vw,44px);line-height:1.1;overflow-wrap:anywhere">{{ c.value }}</span>
+          <span style="color:var(--link);font-size:20px">→</span>
+        </a>
+      </sc-if>
+      <sc-if value="{{ c.isEmail }}" hint-placeholder-val="{{ false }}">
+        <div style="display:grid;grid-template-columns:minmax(90px,200px) minmax(0,1fr) auto;gap:20px;align-items:baseline;padding:22px 0;border-bottom:1px solid var(--rule);color:var(--ink)">
+          <span style="font-family:'Inter',system-ui,sans-serif;font-weight:500;font-size:12px;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted)">{{ c.label }}</span>
+          <sc-if value="{{ c.isShown }}" hint-placeholder-val="{{ false }}"><a href="{{ c.mailto }}" style="font-family:'Inter',system-ui,sans-serif;font-weight:500;font-size:clamp(24px,3.4vw,44px);line-height:1.1;overflow-wrap:anywhere;color:var(--ink)" style-hover="color:var(--link)">{{ c.address }}</a></sc-if>
+          <sc-if value="{{ c.isHidden }}" hint-placeholder-val="{{ true }}"><button onClick="{{ c.reveal }}" style="justify-self:start;font:500 clamp(18px,2vw,24px) 'Inter',system-ui,sans-serif;color:var(--link);background:none;border:0;border-bottom:1px dashed var(--link);padding:0 0 3px;cursor:pointer;text-align:left">{{ t.showEmail }}</button></sc-if>
+          <span style="color:var(--link);font-size:20px">{{ c.arrow }}</span>
+        </div>
+      </sc-if>
+    </sc-for>
+  </main>
+</sc-if>
+
+<footer style="margin-top:auto;border-top:1px solid var(--rule);background:var(--footer)">
+  <div style="max-width:1240px;margin:0 auto;padding:32px clamp(18px,5vw,32px);display:flex;justify-content:space-between;gap:16px 48px;flex-wrap:wrap;font-size:13px;line-height:1.6;color:var(--muted)">
+    <div style="display:flex;gap:6px 20px;flex-wrap:wrap;align-items:baseline">
+      <p style="margin:0">© Emanuele Franceschi</p>
+      <a href="#privacy" onClick="{{ goPrivacy }}" style="color:inherit;text-decoration:underline">{{ t.privacyLink }}</a>
+      <sc-if value="{{ hasAnalytics }}" hint-placeholder-val="{{ false }}"><button onClick="{{ openCookies }}" style="font:inherit;color:inherit;background:none;border:0;padding:0;cursor:pointer;text-decoration:underline">{{ t.cookieSettings }}</button></sc-if>
+    </div>
+    <span style="font-family:'Inter',system-ui,sans-serif;font-weight:500;font-size:12px;display:flex;gap:8px;align-items:center"><span style="width:8px;height:8px;background:var(--ecb);display:block"></span>Updated {{ updated }}</span>
+  </div>
+</footer>
+<sc-if value="{{ showBanner }}" hint-placeholder-val="{{ false }}">
+  <div role="dialog" aria-label="Cookies" style="position:fixed;left:0;right:0;bottom:0;z-index:30;background:var(--surface);border-top:1px solid var(--line);box-shadow:0 -8px 32px rgba(0,0,0,0.25)">
+    <div style="max-width:1240px;margin:0 auto;padding:18px clamp(18px,5vw,32px);display:flex;gap:16px 32px;flex-wrap:wrap;align-items:center;justify-content:space-between">
+      <div style="flex:1 1 420px;max-width:80ch;display:flex;flex-direction:column;gap:6px"><span style="font-size:15px;font-weight:600;color:var(--ink)">{{ t.cookieTitle }}</span><p style="margin:0;font-size:14px;line-height:1.55;color:var(--soft)">{{ t.cookieText }} <a href="#privacy" onClick="{{ goPrivacy }}">{{ t.cookieMoreLabel }}</a></p></div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap">
+        <button onClick="{{ declineCookies }}" style="font:500 14px 'Inter',system-ui,sans-serif;padding:9px 18px;color:var(--ink);background:transparent;border:1px solid var(--ink);cursor:pointer">{{ t.cookieDecline }}</button>
+        <button onClick="{{ acceptCookies }}" style="font:500 14px 'Inter',system-ui,sans-serif;padding:9px 18px;color:var(--ink);background:transparent;border:1px solid var(--ink);cursor:pointer">{{ t.cookieAccept }}</button>
+      </div>
+    </div>
+  </div>
+</sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;darkDefault&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Look&quot;},&quot;abstractsOpen&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Research&quot;}}">
+const PAGES = [['home','Home'],['research','Research'],['resources','Resources'],['cv','CV'],['contacts','Contacts'],['privacy','Privacy',true]];
+const EMPTY = { research: [], data: [], codes: [], blogs: [], contacts: [], topics: [] };
+class Component extends DCLogic {
+  state = { page: 'home', type: 'all', topic: 'all', open: {}, dark: null, narrow: false, phone: false, consent: null, ccOpen: false, shown: {}, closed: { Data: true, Codes: true, Blogs: true } };
+  componentDidMount() {
+    const read = () => { let p = (location.hash || '#home').slice(1).split('/')[0]; if (p === 'parerga') p = 'resources'; if (PAGES.some(x => x[0] === p)) { this.setState({ page: p }); this.ga(); this.track(p); } };
+    this.setState({ consent: this.getConsent() });
+    this.ga();
+    read(); this._h = read; window.addEventListener('hashchange', read);
+    if (window.matchMedia) { this._mq = window.matchMedia('(max-width: 999px)'); this._mqh = () => this.setState({ narrow: this._mq.matches }); this._mqh(); this._mq.addEventListener('change', this._mqh);
+      this._mp = window.matchMedia('(max-width: 700px)'); this._mph = () => this.setState({ phone: this._mp.matches }); this._mph(); this._mp.addEventListener('change', this._mph); }
+    if (!window.SITE_DATA) this._t = setInterval(() => { if (window.SITE_DATA) { clearInterval(this._t); this.ga(); this.track(this.curPage()); this.forceUpdate(); } }, 40);
+  }
+  componentWillUnmount() { window.removeEventListener('hashchange', this._h); clearInterval(this._t); if (this._mq) this._mq.removeEventListener('change', this._mqh); if (this._mp) this._mp.removeEventListener('change', this._mph); }
+  curPage() { let p = (location.hash || '#home').slice(1).split('/')[0]; if (p === 'parerga') p = 'resources'; return PAGES.some(x => x[0] === p) ? p : 'home'; }
+  ga() {
+    const id = window.SITE_DATA && window.SITE_DATA.analyticsId;
+    if (!/^G-[A-Z0-9]{6,}$/.test(id || '') || /^G-X+$/.test(id) || window.__gaOn || this.getConsent() !== 'granted') return;
+    window.__gaOn = true; window.dataLayer = window.dataLayer || [];
+    window.gtag = function () { window.dataLayer.push(arguments); };
+    window.gtag('consent', 'default', { analytics_storage: 'granted', ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied' });
+    window.gtag('js', new Date());
+    window.gtag('config', id, { send_page_view: false, allow_google_signals: false, allow_ad_personalization_signals: false, cookie_expires: 34128000, cookie_flags: 'SameSite=Lax;Secure' });
+    const sc = document.createElement('script'); sc.async = true; sc.src = 'https://www.googletagmanager.com/gtag/js?id=' + encodeURIComponent(id); document.head.appendChild(sc);
+  }
+  track(p) {
+    if (!window.gtag || this._last === p) return;
+    this._last = p;
+    window.gtag('event', 'page_view', { page_title: p, page_path: '/#' + p, page_location: location.origin + location.pathname + '#' + p });
+  }
+  getConsent() { try { return localStorage.getItem('ga-consent'); } catch (e) { return this._c || null; } }
+  setConsent(v) {
+    this._c = v;
+    try { localStorage.setItem('ga-consent', v); } catch (e) {}
+    this.setState({ consent: v, ccOpen: false });
+    const id = window.SITE_DATA && window.SITE_DATA.analyticsId;
+    if (v === 'granted') { if (id) window['ga-disable-' + id] = false; this.ga(); this._last = undefined; this.track(this.curPage()); }
+    else this.stopGa(id);
+  }
+  stopGa(id) {
+    if (id) window['ga-disable-' + id] = true;
+    try {
+      document.cookie.split(';').forEach(c => {
+        const n = c.split('=')[0].trim();
+        if (n !== '_ga' && n.indexOf('_ga_') !== 0) return;
+        const gone = '=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/';
+        document.cookie = n + gone;
+        const h = location.hostname.split('.');
+        for (let i = 0; i < h.length - 1; i++) document.cookie = n + gone + ';domain=' + h.slice(i).join('.');
+      });
+    } catch (e) {}
+  }
+  tog(k) { return () => { if (!this.state.narrow) return; this.setState(st => ({ closed: { ...st.closed, [k]: !st.closed[k] } })); }; }
+  go(p) { return e => { e && e.preventDefault && e.preventDefault(); history.replaceState(null, '', '#' + p); this.setState({ page: p }); this.ga(); this.track(p); window.scrollTo({ top: 0, behavior: 'smooth' }); }; }
+  renderVals() {
+    const D = window.SITE_DATA || EMPTY;
+    const B_ = window.SITE_BUILD || {};
+    const loc = u => !!u && !/^([a-z][a-z0-9+.-]*:|\/\/|#)/i.test(u);
+    const stamp = u => (loc(u) && B_.stamp) ? u + (u.indexOf('?') < 0 ? '?' : '&') + 'v=' + B_.stamp : u;
+    const cvUrl = stamp(D.cv || 'papers/cv.pdf');
+    const { page, type, topic, open, narrow, closed } = this.state;
+    const isOpen_ = k => !narrow || !closed[k];
+    const hdr = { font: 'inherit', color: 'inherit', background: 'none', border: 0, padding: 0, width: '100%', textAlign: 'left', display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', gap: 12, cursor: narrow ? 'pointer' : 'default' };
+    const ind = k => narrow ? (closed[k] ? '+' : '−') : '';
+    const allOpen = this.props.abstractsOpen ?? false;
+    const dark = this.state.dark ?? (this.props.darkDefault ?? true);
+    const nav = PAGES.filter(p => !p[2]).map(([k, label]) => ({ label, href: '#' + k, go: this.go(k), style: { padding: '7px 12px', fontSize: 14, fontWeight: 500, color: page === k ? 'var(--ink)' : 'var(--muted)', whiteSpace: 'nowrap', flex: 'none', boxShadow: page === k ? 'inset 0 -2px 0 var(--ecb)' : 'none' } }));
+    const chip = on => ({ font: "400 14px 'Inter',system-ui,sans-serif", padding: '3px 0', cursor: 'pointer', border: 0, borderBottom: '1px solid ' + (on ? 'var(--ecb)' : 'transparent'), background: 'transparent', color: on ? 'var(--ink)' : 'var(--muted)' });
+    const typeChips = [['all','All'],['pub','Publications'],['policy','Policy'],['wip','Ongoing'],['other','Other']].map(([k, label]) => ({ label, on: type === k, style: chip(type === k), go: () => this.setState({ type: k }) }));
+    const topicChips = ['all', ...D.topics].map(t => ({ label: t === 'all' ? 'All' : t, on: topic === t, style: chip(topic === t), go: () => this.setState({ topic: t }) }));
+    const build = s => s.items.map((it, i) => ({ it, id: s.key + i })).filter(({ it }) => !it.hidden && (topic === 'all' || (it.topics || []).includes(topic))).map(({ it, id }) => {
+      const isOpen = open[id] ?? allOpen;
+      return { ...it, url: stamp(it.url), chartUrl: it.chart ? (loc(it.chart) && it.chart.indexOf('/') < 0 ? 'charts/' + it.chart : it.chart) : 'charts/placeholder.svg', yearLabel: it.year || '—', noUrl: !it.url, links: (it.links || []).map(l => ({ ...l, url: stamp(l.url) })), open: !!(it.abstract && isOpen), toggleLabel: isOpen ? 'Hide abstract −' : 'Abstract +', toggle: () => this.setState(st => ({ open: { ...st.open, [id]: !isOpen } })) };
+    });
+    const byKey = k => D.research.find(s => s.key === k);
+    const wipGroups = [['wip', 'In progress'], ['long', 'Longer-term']].map(([k, label]) => byKey(k) ? { label, items: build(byKey(k)) } : null).filter(g => g && g.items.length);
+    const sections = D.research.filter(s => s.key !== 'long' && s.key !== 'wip' && (type === 'all' || s.key === type)).map(s => ({ key: s.key, title: s.title, groups: [{ label: '', items: build(s) }] }));
+    if (byKey('wip') && (type === 'all' || type === 'wip')) {
+      const at = sections.findIndex(s => s.key === 'other');
+      sections.splice(at < 0 ? sections.length : at, 0, { key: 'wip', title: 'Work in progress', groups: wipGroups });
+    }
+    const sections2 = sections.filter(s => s.groups.some(g => g.items.length));
+    sections.length = 0; sections.push(...sections2);
+    const fo = D.imageFocus || {}, fp = D.imageFocusPhone || {};
+    const pf = (k, d) => (this.state.phone && fp[k]) || fo[k] || d;
+    const contacts = (D.contacts || []).filter(x => !x.hidden).map(c => {
+      const email = !!c.email64, shown = email && !!this.state.shown[c.label], url = c.url || D[c.ref];
+      let address = '';
+      if (shown) { try { address = atob(c.email64); } catch (e) {} }
+      return { label: c.label, value: c.value, target: c.target || '_blank', url, isEmail: email, isLink: !email && !!url, isShown: shown && !!address, isHidden: email && !shown, address, mailto: address ? 'mailto:' + address : '', arrow: shown ? '→' : '', reveal: () => this.setState(st => ({ shown: { ...st.shown, [c.label]: true } })) };
+    });
+    const P_ = D.privacy || { title: '', updated: '', sections: [] };
+    const pv = { title: P_.title, updated: P_.updated, sections: (P_.sections || []).map(x => ({ h: x.h, paras: (x.paras || []).map(t => ({ t })) })) };
+    const R = D.research;
+    const latest = R.length ? [...R[1].items.slice(0, 3).map(i => ({ ...i, kind: 'Policy' })), { ...R[0].items[0], kind: 'Journal' }] : [];
+    return {
+      homeLinks: (D.homeLinks || []).filter(x => !x.hidden).map(x => x.ref === 'cv' ? { ...x, url: '#cv', target: '_self', go: this.go('cv') } : { ...x, url: x.url || D[x.ref], target: '_blank', go: undefined }).filter(x => x.url),
+      cvUrl, cvEmbed: cvUrl + '#view=FitH', showCharts: D.showCharts !== false, artCols: this.state.phone ? '48px minmax(0,1fr)' : '60px minmax(0,1fr) clamp(170px,24%,270px)',
+      chartCell: 'display:block;background:var(--surface);border:1px solid var(--rule);align-self:start;margin-top:4px;' + (this.state.phone ? 'grid-column:2;grid-row:2;max-width:360px' : 'grid-column:3;grid-row:1'),
+      chartFail: e => { const i = e.target; if (i.dataset.f) return; i.dataset.f = '1'; i.src = 'charts/placeholder.svg'; },
+      contacts,
+      pos: { home: pf('home', '50% 50%'), research: pf('research', '50% 50%'), resources: pf('resources', '50% 50%'), contacts: pf('contacts', '50% 50%'), portrait: pf('portrait', '50% 18%') },
+      hasAnalytics: !!D.analyticsId, showBanner: !!D.analyticsId && (this.state.consent === null || this.state.ccOpen),
+      pv, goPrivacy: this.go('privacy'),
+      acceptCookies: () => this.setConsent('granted'), declineCookies: () => this.setConsent('denied'), openCookies: () => this.setState({ ccOpen: true }),
+      t: D.text || {}, hdr, cols: narrow ? 'minmax(0,1fr)' : 'repeat(' + Math.max(1, [(D.show||{}).data, (D.show||{}).codes, (D.show||{}).blogs].filter(v => v !== false).length) + ',minmax(0,1fr))', tabIdx: narrow ? '0' : '-1',
+      toggleData: this.tog('Data'), toggleCodes: this.tog('Codes'), toggleBlogs: this.tog('Blogs'),
+      openData: isOpen_('Data'), openCodes: isOpen_('Codes'), openBlogs: isOpen_('Blogs'),
+      expData: String(isOpen_('Data')), expCodes: String(isOpen_('Codes')), expBlogs: String(isOpen_('Blogs')),
+      indData: ind('Data'), indCodes: ind('Codes'), indBlogs: ind('Blogs'),
+      nav, typeChips, topicChips, sections, latest, noResults: R.length > 0 && !sections.length,
+      resetFilters: () => this.setState({ type: 'all', topic: 'all' }),
+      data: D.data.filter(x => !x.hidden), codes: D.codes.filter(x => !x.hidden), blogs: D.blogs.filter(x => !x.hidden), showData: (D.show || {}).data !== false, showCodes: (D.show || {}).codes !== false, showBlogs: (D.show || {}).blogs !== false, cv: D.cv, repec: D.repec, updated: B_.updated || D.updated,
+      isHome: page === 'home', isResearch: page === 'research', isResources: page === 'resources', isContacts: page === 'contacts', isPrivacy: page === 'privacy', isCv: page === 'cv',
+      theme: dark ? 'dark' : 'light', toggleTheme: () => this.setState({ dark: !dark }),
+      goHome: this.go('home'), goResearch: this.go('research')
+    };
+  }
+}
+</script>
+</body>
+</html>
