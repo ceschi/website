@@ -415,7 +415,7 @@ class Component extends DCLogic {
       homeLinks: (D.homeLinks || []).filter(x => !x.hidden).map(x => x.ref === 'cv' ? { ...x, url: '#cv', target: '_self', go: this.go('cv') } : { ...x, url: x.url || D[x.ref], target: '_blank', go: undefined }).filter(x => x.url),
       cvUrl, cvEmbed: cvUrl + '#view=FitH', showCharts: D.showCharts !== false, sideChart: D.showCharts !== false && !narrow, inlineChart: D.showCharts !== false && narrow, artCols: narrow ? (this.state.phone ? '48px' : '60px') + ' minmax(0,1fr)' : '60px minmax(0,1fr) clamp(170px,24%,270px)',
       // Wide: chart sits in a third column. Narrow (<1000 px): chart sits inside the text column, just before the abstract, so the text keeps the full width.
-      chartCell: 'display:block;background:var(--surface);border:1px solid var(--rule);align-self:start;' + (narrow ? 'max-width:360px;margin-top:4px' : 'margin-top:4px;grid-column:3;grid-row:1'),
+      chartCell: 'display:block;background:var(--surface);border:1px solid var(--rule);align-self:start;' + (narrow ? 'width:clamp(220px,62vw,440px);max-width:100%;margin-top:4px' : 'margin-top:4px;grid-column:3;grid-row:1'),
       // Contact rows: font scales with viewport (18 px phone to 30 px laptop). On phone the label stacks above the value so the value keeps the full width.
       cFont: 'clamp(18px,3.2vw,30px)', cCols: this.state.phone ? 'minmax(0,1fr) auto' : 'minmax(90px,200px) minmax(0,1fr) auto', cGap: this.state.phone ? '6px 12px' : '20px',
       cLabel: "font-family:'Inter',system-ui,sans-serif;font-weight:500;font-size:12px;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted)" + (this.state.phone ? ';grid-column:1/-1' : ''),
