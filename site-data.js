@@ -63,7 +63,7 @@ text: {
  cookieDecline: "Decline",
  privacyLink: "Privacy",
  cookieSettings: "Cookie settings",
- blogsIntro: "Websites and blogs on economics, scientific and non-specialist alike, in more or less random order. I try to be pluralistic, though some biases are of course present.",
+ blogsIntro: "Websites and blogs on economics, scientific and non-specialist alike.",
 },
 // Links under the bio on the home page. "ref" takes the address from the top of this file
 // (repec, cv, twitter, linkedin). Hide a link with hidden:true.
@@ -138,16 +138,16 @@ research: [
   {year:'2025',topics:['Inflation','Monetary policy'],title:'Cast out the pure? Inflation and relative prices on both sides of the Atlantic',url:'https://www.ecb.europa.eu/press/conferences/shared/pdf/20250929_inflation_conference/05_Poster-paper_Parker.pdf',with:'C. Osbat and M. Parker',status:'Draft on request',abstract:'What drives inflation — domestic monetary policy or relative price shocks? During decades of low inflation, large relative price shocks, notably energy, seem to have accounted for the bulk of inflation movements. We estimate the role of “pure” inflation versus relative prices using a modification of Reis and Watson (2010). Relative prices substantially explain the rise in inflation during 2021–2022 and its subsequent fall; we find little support for “pure” inflation as a material cause of recent dynamics.'},
   {year:'',topics:['Inflation'],title:'Inflation persistence before and after the 2021–2023 reflation',url:'https://github.com/ceschi/ceschi.github.io/blob/master/papers/inflationpers.pdf',abstract:'Until the 2021–2023 spike, US inflation was comparable to a white-noise process, with very low persistence. The reflation brought persistence back to early-2000s levels. We find this consistently across five measures of US inflation and three methods of increasing sophistication — frequentist, Bayesian and deep neural networks. Before the recent rise, persistence had been decreasing since the mid-90s. Current, higher persistence also suggests monetary transmission to realised inflation is slower than before.',links:[{label:'Short slides',url:'https://drive.google.com/file/d/1Hm_ipSZjW0shefz2pBhUj40VTRoIJgAH/view?usp=sharing'}]},
   {year:'2020',topics:['Monetary policy'],title:'A simple model with liquidity',url:'https://github.com/ceschi/ceschi.github.io/blob/master/papers/EFranceschi_liquidity.pdf',abstract:'We propose a model with liquid bonds, money and illiquid assets. This simple set-up breaks the New Keynesian requirement for aggressive monetary policy. We study how liquidity affects portfolio choices and shock propagation: inflation displays higher inertia under a stable, accommodative stance. We also study how a liquidity dry-up propagates through the economy.',links:[{label:'PSE Working Paper',url:'https://hal-pse.archives-ouvertes.fr/PSE_WP/halshs-02978552'}]},
-  {year:'',topics:['Financial stability'],title:'Euro area investment funds leverage',with:'L. Cappiello and O. Schwartz Blicke',status:'In progress',abstract:'We combine granular information on the asset holdings of euro area investment funds with transaction-level data on repo and margin borrowing, describing funds’ financial leverage and how it evolved over the recent hiking cycle. In aggregate leverage is low, though some financial stability risk is heavily clustered in a few funds, whose centrality and net positions we study.'},
-  {year:'',topics:['Financial stability'],title:'Financial conglomerates: blurred lines between banks and non-banks',status:'Early stage',abstract:'Combining detailed ownership data on euro area financial entities with supervisory reports, I reconstruct the networks of financial conglomerates — often a large supervised bank plus a host of highly specialised NBFI entities — and investigate the synergies and interactions among them.'}]},
+  {hidden: true, year:'',topics:['Financial stability'],title:'Euro area investment funds leverage',with:'L. Cappiello and O. Schwartz Blicke',status:'In progress',abstract:'We combine granular information on the asset holdings of euro area investment funds with transaction-level data on repo and margin borrowing, describing funds’ financial leverage and how it evolved over the recent hiking cycle. In aggregate leverage is low, though some financial stability risk is heavily clustered in a few funds, whose centrality and net positions we study.'},
+  {hidden: true, year:'',topics:['Financial stability'],title:'Financial conglomerates: blurred lines between banks and non-banks',status:'Early stage',abstract:'Combining detailed ownership data on euro area financial entities with supervisory reports, I reconstruct the networks of financial conglomerates — often a large supervised bank plus a host of highly specialised NBFI entities — and investigate the synergies and interactions among them.'}]},
  {key:'long',title:'Longer-term projects',items:[
-  {year:'',topics:['Inflation','Monetary policy'],title:'Sectoral inflation and optimal monetary policy'},
-  {year:'',topics:['Monetary policy'],title:'ML-VAR: a machine learning approach to time-series macroeconometrics'}]},
+  {hidden: true, year:'',topics:['Inflation','Monetary policy'],title:'Sectoral inflation and optimal monetary policy'},
+  {hidden: true, year:'',topics:['Monetary policy'],title:'ML-VAR: a machine learning approach to time-series macroeconometrics'}]},
  {key:'other',title:'Other',items:[
   {year:'2015',topics:['Integration & growth'],title:'Effects of labour market frictions and knowledge spillover on structural change',venue:'ETE Master’s thesis, supervised by Prof. F. Coricelli',abstract:'A simple two-sector model accounts for the effect of labour market frictions and sectoral productivity differentials on structural change dynamics, intended as the industry labour share.'}]}
 ],
 data: [
- {name:"US micro-macro data",desc:"In-house database blending micro and macro data on the US economy, built by the scripts below.",url:"https://github.com/ceschi/us_macro_data"},
+ {hidden: true, name:"US micro-macro data",desc:"In-house database blending micro and macro data on the US economy, built by the scripts below.",url:"https://github.com/ceschi/us_macro_data"},
  {name:"IMF data",desc:"The World Economic Outlook database: macro time series for a wide range of countries.",url:"http://www.imf.org/en/Data"},
  {name:"EUKLEMS",desc:"Industry-level time series for developed countries in a consistent accounting framework.",url:"https://euklems.eu/"},
  {name:"FRED",desc:"St. Louis Fed data on US GDP, rates, financial indicators and money, with a handy API.",url:"https://fred.stlouisfed.org/"},
@@ -172,13 +172,14 @@ codes: [
  {tag:'Python · Julia',name:'QuantEcon',desc:'Sargent & Stachurski’s lectures on macroeconomics, with code and notebooks.',url:'https://quantecon.org/'}
 ],
 blogs: [
+ {name: "The ECB blog", note: "Dissemination posts from ECB economists", url:"https://www.ecb.europa.eu/press/blog/html/index.en.html"},
  {name:"The Grumpy Economist",note:"John Cochrane’s blog",url:"https://johnhcochrane.blogspot.com/"},
  {name:"VoxEU",note:"The CEPR policy portal",url:"http://voxeu.org/"},
- {name:"Noahpinion",note:"Noah Smith’s blog",url:"http://noahpinionblog.blogspot.com/"},
+ {hidden: true, name:"Noahpinion",note:"Noah Smith’s blog",url:"http://noahpinionblog.blogspot.com/"},
  {name:"La Voce",note:"Dissemination blog, in Italian",url:"http://www.lavoce.info/"},
  {name:"Bloomberg Opinion",note:"Currently debated topics",url:"https://www.bloomberg.com/opinion"},
- {name:"The Economist",note:"Needless to say",url:"https://www.economist.com/"},
- {name:"Paul Krugman",note:"His column",url:"https://www.nytimes.com/column/paul-krugman"},
+ {hidden: true, name:"The Economist",note:"Needless to say",url:"https://www.economist.com/"},
+ {hidden: true, name:"Paul Krugman",note:"His column",url:"https://www.nytimes.com/column/paul-krugman"},
  {name:"Mainly Macro",note:"Simon Wren-Lewis’ blog",url:"https://mainlymacro.blogspot.com"},
  {name:"The CORE project",note:"A hands-on way of teaching econ",url:"http://www.core-econ.org/"},
  {name:"Thomas Piketty",note:"Blog in Le Monde, in French",url:"http://piketty.blog.lemonde.fr/"},
@@ -189,11 +190,11 @@ blogs: [
  {name:"Job Openings for Economists",note:"From the AEA",url:"https://www.aeaweb.org/joe/"},
  {name:"Acemoglu facts",note:"Because we all love Daron",url:"https://daronacemoglufacts.tumblr.com/"},
  {name:"MacroMania",note:"David Andolfatto’s blog",url:"http://andolfatto.blogspot.com/"},
- {name:"Noise from Amerika",note:"Italian economists in the US on Italy",url:"http://noisefromamerika.org/"},
- {name:"Marginal Revolution",note:"Tyler Cowen’s blog",url:"http://marginalrevolution.com/"},
- {name:"INET",note:"Institute for New Economic Thinking",url:"https://www.ineteconomics.org/perspectives/blog"},
- {name:"Europa o no?",note:"Luigi Zingales’ blog (IT/EN)",url:"https://europaono.com/"},
- {name:"Economist’s View",note:"Mark Thoma’s link collector",url:"http://economistsview.typepad.com/"},
+ {hidden: true, name:"Noise from Amerika",note:"Italian economists in the US on Italy",url:"http://noisefromamerika.org/"},
+ {hidden: true, name:"Marginal Revolution",note:"Tyler Cowen’s blog",url:"http://marginalrevolution.com/"},
+ {hidden: true, name:"INET",note:"Institute for New Economic Thinking",url:"https://www.ineteconomics.org/perspectives/blog"},
+ {hidden: true, name:"Europa o no?",note:"Luigi Zingales’ blog (IT/EN)",url:"https://europaono.com/"},
+ {hidden: true, name:"Economist’s View",note:"Mark Thoma’s link collector",url:"http://economistsview.typepad.com/"},
 ],
 contacts: [
  // Emails are stored encoded (base64) and only decoded when a visitor clicks "Show email address".
