@@ -35,7 +35,7 @@ github: 'https://github.com/ceschi',
 // Pictures are cropped differently on a laptop (wide strip) and a phone (tall strip), so there are two lists.
 imageFocus: {home:'50% 50%', research:'50% 60%', resources:'50% 50%', contacts:'50% 20%', portrait:'50% 18%'},
 imageFocusPhone: {home:'50% 50%', research:'50% 50%', resources:'50% 50%', contacts:'50% 50%', portrait:'50% 18%'},
-show: {data:false, codes:false, blogs:true},
+show: {data:true, codes:true, blogs:true},
 // Google Analytics measurement ID. Replace G-XXXXXXXXXX with your real ID (looks like G-AB12CD34EF).
 // While it is the placeholder, the cookie notice is shown but nothing is sent to Google.
 // Set it to '' (empty) to remove tracking and the cookie notice altogether.
@@ -46,7 +46,7 @@ text: {
  homeTagline: "Financial stability, macro-finance, and monetary policy.",
  homeBio: "I am a Financial Stability Expert (Economist) in the ECB’s Directorate General for Macroprudential Policy and Financial Stability. In 2021 I received my PhD from the Paris School of Economics and Paris 1 Panthéon-Sorbonne. This is my personal site, where I post updates and material about my research.",
  homeDisclaimer: "This is my private site; the views expressed do not necessarily reflect those of the European Central Bank or the Eurosystem.",
- dataIntro: "Open-access sources, many with APIs.",
+ dataIntro: "Short collection of open-access sources, many with APIs, so I don\'t forget.",
  dataNoteBefore: "Administrative data are usually free but need paperwork for confidentiality; private providers (Bloomberg, FactSet, Bureau van Dijk, Compustat) sell granular data. If your institution subscribes to ",
  dataNoteLinkLabel: "Wharton Research Data Services",
  dataNoteLinkUrl: "https://wrds-web.wharton.upenn.edu/wrds/",
@@ -142,13 +142,14 @@ research: [
   {year:'2020',topics:['Monetary policy'],title:'A simple model with liquidity',url:'https://github.com/ceschi/ceschi.github.io/blob/master/papers/EFranceschi_liquidity.pdf',abstract:'We propose a model with liquid bonds, money and illiquid assets. This simple set-up breaks the New Keynesian requirement for aggressive monetary policy. We study how liquidity affects portfolio choices and shock propagation: inflation displays higher inertia under a stable, accommodative stance. We also study how a liquidity dry-up propagates through the economy.',links:[{label:'PSE Working Paper',url:'https://hal-pse.archives-ouvertes.fr/PSE_WP/halshs-02978552'}]},
   {hidden: true, year:'',topics:['Financial stability'],title:'Euro area investment funds leverage',with:'L. Cappiello and O. Schwartz Blicke',status:'In progress',abstract:'We combine granular information on the asset holdings of euro area investment funds with transaction-level data on repo and margin borrowing, describing funds’ financial leverage and how it evolved over the recent hiking cycle. In aggregate leverage is low, though some financial stability risk is heavily clustered in a few funds, whose centrality and net positions we study.'},
   {hidden: true, year:'',topics:['Financial stability'],title:'Financial conglomerates: blurred lines between banks and non-banks',status:'Early stage',abstract:'Combining detailed ownership data on euro area financial entities with supervisory reports, I reconstruct the networks of financial conglomerates — often a large supervised bank plus a host of highly specialised NBFI entities — and investigate the synergies and interactions among them.'}]},
- {key:'long',title:'Longer-term projects',items:[
+ {hidden: true, key:'long',title:'Longer-term projects',items:[
   {hidden: true, year:'',topics:['Inflation','Monetary policy'],title:'Sectoral inflation and optimal monetary policy'},
   {hidden: true, year:'',topics:['Monetary policy'],title:'ML-VAR: a machine learning approach to time-series macroeconometrics'}]},
  {key:'other',title:'Other',items:[
   {year:'2015',topics:['Integration & growth'],title:'Effects of labour market frictions and knowledge spillover on structural change',venue:'ETE Master’s thesis, supervised by Prof. F. Coricelli',abstract:'A simple two-sector model accounts for the effect of labour market frictions and sectoral productivity differentials on structural change dynamics, intended as the industry labour share.'}]}
 ],
 data: [
+ {name:"ECB Data Portal",desc:"Macro, monetary, and financial data on the euro area.",url:"https://data.ecb.europa.eu"},
  {hidden: true, name:"US micro-macro data",desc:"In-house database blending micro and macro data on the US economy, built by the scripts below.",url:"https://github.com/ceschi/us_macro_data"},
  {name:"IMF data",desc:"The World Economic Outlook database: macro time series for a wide range of countries.",url:"http://www.imf.org/en/Data"},
  {name:"EUKLEMS",desc:"Industry-level time series for developed countries in a consistent accounting framework.",url:"https://euklems.eu/"},
@@ -168,10 +169,14 @@ data: [
  {name:"Barcelona open data",desc:"Open data from the city of Barcelona.",url:"https://opendata-ajuntament.barcelona.cat/data/en/dataset"},
 ],
 codes: [
- {tag:'R · data pipeline',name:'us_macro_data',desc:'Gathers, harmonises and updates US data. Installs required packages on first run.',url:'https://github.com/ceschi/us_macro_data'},
- {tag:'Dataset · txt',name:'US_data.txt',desc:'Processed output of the pipeline above.',url:'https://raw.githubusercontent.com/ceschi/us_macro_data/master/processed_data/US_data.txt'},
+ {hidden: true, tag:'R · data pipeline',name:'us_macro_data',desc:'Gathers, harmonises and updates US data. Installs required packages on first run.',url:'https://github.com/ceschi/us_macro_data'},
+ {hidden: true, tag:'Dataset · txt',name:'US_data.txt',desc:'Processed output of the pipeline above.',url:'https://raw.githubusercontent.com/ceschi/us_macro_data/master/processed_data/US_data.txt'},
  {tag:'GitHub',name:'github.com/ceschi',desc:'All my public repositories.',url:'https://github.com/ceschi'},
- {tag:'Python · Julia',name:'QuantEcon',desc:'Sargent & Stachurski’s lectures on macroeconomics, with code and notebooks.',url:'https://quantecon.org/'}
+ {tag:'Python · Julia',name:'QuantEcon',desc:'Sargent & Stachurski’s lectures on macroeconomics, with code and notebooks.',url:'https://quantecon.org/'},
+ {tag:'Macro · Python',name:'Joshua Chan code',desc:'Joshua Chan\'s Matlab package for Bayesian time series, ported to python with tutorials.',url:'https://github.com/joshuaccchan/bvar-toolkit-python'},
+ {tag:'Macro · Matlab',name:'VAR toolbox and tutorial',desc:'Ambrogio Cesa Bianchi compiled a nice VAR toolbox in Matlab, with a very useful primer on VARs.',url:'https://ambrogiocesabianchi.com/var-toolbox.html'},
+ {tag:'Latex',name:'Beamer templates',desc:'Ambrogio Cesa Bianchi also has a nice bramer template for academic presentations.',url:'https://ambrogiocesabianchi.com/latex.html'},
+
 ],
 blogs: [
  {name: "The ECB blog", note: "Dissemination posts from ECB economists", url:"https://www.ecb.europa.eu/press/blog/html/index.en.html"},
@@ -182,16 +187,16 @@ blogs: [
  {name:"Bloomberg Opinion",note:"Currently debated topics",url:"https://www.bloomberg.com/opinion"},
  {hidden: true, name:"The Economist",note:"Needless to say",url:"https://www.economist.com/"},
  {hidden: true, name:"Paul Krugman",note:"His column",url:"https://www.nytimes.com/column/paul-krugman"},
- {name:"Mainly Macro",note:"Simon Wren-Lewis’ blog",url:"https://mainlymacro.blogspot.com"},
- {name:"The CORE project",note:"A hands-on way of teaching econ",url:"http://www.core-econ.org/"},
- {name:"Thomas Piketty",note:"Blog in Le Monde, in French",url:"http://piketty.blog.lemonde.fr/"},
+ {hidden: true, name:"Mainly Macro",note:"Simon Wren-Lewis’ blog",url:"https://mainlymacro.blogspot.com"},
+ {hidden: true, name:"The CORE project",note:"A hands-on way of teaching econ",url:"http://www.core-econ.org/"},
+ {hidden: true, name:"Thomas Piketty",note:"Blog in Le Monde, in French",url:"http://piketty.blog.lemonde.fr/"},
  {name:"Eco Notepad",note:"Banque de France dissemination blog",url:"https://blocnotesdeleco.banque-france.fr/en"},
  {name:"Liberty Street Economics",note:"New York Fed’s blog",url:"http://libertystreeteconomics.newyorkfed.org/"},
  {name:"Econbrowser",note:"Menzie Chinn and James Hamilton",url:"http://econbrowser.com/"},
  {name:"CEPII",note:"CEPII’s blog",url:"http://www.cepii.fr/BLOG/bi/blog.asp"},
  {name:"Job Openings for Economists",note:"From the AEA",url:"https://www.aeaweb.org/joe/"},
  {name:"Acemoglu facts",note:"Because we all love Daron",url:"https://daronacemoglufacts.tumblr.com/"},
- {name:"MacroMania",note:"David Andolfatto’s blog",url:"http://andolfatto.blogspot.com/"},
+ {hidden: true, name:"MacroMania",note:"David Andolfatto’s blog",url:"http://andolfatto.blogspot.com/"},
  {hidden: true, name:"Noise from Amerika",note:"Italian economists in the US on Italy",url:"http://noisefromamerika.org/"},
  {hidden: true, name:"Marginal Revolution",note:"Tyler Cowen’s blog",url:"http://marginalrevolution.com/"},
  {hidden: true, name:"INET",note:"Institute for New Economic Thinking",url:"https://www.ineteconomics.org/perspectives/blog"},
