@@ -176,7 +176,7 @@ a:hover{color:var(--ink)}
   <main style="max-width:1240px;width:100%;box-sizing:border-box;margin:0 auto;padding:48px clamp(18px,5vw,32px) 96px;display:grid;grid-template-columns:{{ cols }};gap:56px clamp(32px,4vw,56px);align-items:start">
       <sc-if value="{{ showData }}" hint-placeholder-val="{{ true }}">
         <section style="border-top:1px solid var(--ink);padding-top:22px;display:flex;flex-direction:column;gap:20px">
-          <h2 style="margin:0;font-family:'Inter',system-ui,sans-serif;font-weight:500;font-size:34px;line-height:1"><span style="width:32px;height:3px;background:var(--ecb);display:block;margin-bottom:12px"></span><button onClick="{{ toggleData }}" aria-expanded="{{ expData }}" tabindex="{{ tabIdx }}" style="{{ hdr }}"><span>Data sources</span><span aria-hidden="true" style="font-family:'Inter',system-ui,sans-serif;font-weight:500;font-size:20px;color:var(--link)">{{ indData }}</span></button></h2>
+          <h2 style="margin:0;font-family:'Inter',system-ui,sans-serif;font-weight:500;font-size:34px;line-height:1"><span style="width:32px;height:3px;background:var(--ecb);display:block;margin-bottom:12px"></span><button onClick="{{ toggleData }}" aria-expanded="{{ expData }}" tabindex="{{ tabIdx }}" style="{{ hdr }}"><span>{{ t.dataTitle }}</span><span aria-hidden="true" style="font-family:'Inter',system-ui,sans-serif;font-weight:500;font-size:20px;color:var(--link)">{{ indData }}</span></button></h2>
           <sc-if value="{{ openData }}" hint-placeholder-val="{{ true }}">
             <p style="margin:0;font-size:14px;line-height:1.6;color:var(--muted);max-width:62ch">{{ t.dataIntro }}</p>
             <div style="min-width:0;display:flex;flex-direction:column">
@@ -193,7 +193,7 @@ a:hover{color:var(--ink)}
       </sc-if>
       <sc-if value="{{ showCodes }}" hint-placeholder-val="{{ true }}">
         <section style="border-top:1px solid var(--ink);padding-top:22px;display:flex;flex-direction:column;gap:20px">
-          <h2 style="margin:0;font-family:'Inter',system-ui,sans-serif;font-weight:500;font-size:34px;line-height:1"><span style="width:32px;height:3px;background:var(--ecb);display:block;margin-bottom:12px"></span><button onClick="{{ toggleCodes }}" aria-expanded="{{ expCodes }}" tabindex="{{ tabIdx }}" style="{{ hdr }}"><span>Code &amp; datasets</span><span aria-hidden="true" style="font-family:'Inter',system-ui,sans-serif;font-weight:500;font-size:20px;color:var(--link)">{{ indCodes }}</span></button></h2>
+          <h2 style="margin:0;font-family:'Inter',system-ui,sans-serif;font-weight:500;font-size:34px;line-height:1"><span style="width:32px;height:3px;background:var(--ecb);display:block;margin-bottom:12px"></span><button onClick="{{ toggleCodes }}" aria-expanded="{{ expCodes }}" tabindex="{{ tabIdx }}" style="{{ hdr }}"><span>{{ t.codesTitle }}</span><span aria-hidden="true" style="font-family:'Inter',system-ui,sans-serif;font-weight:500;font-size:20px;color:var(--link)">{{ indCodes }}</span></button></h2>
           <sc-if value="{{ openCodes }}" hint-placeholder-val="{{ true }}">
             <p style="margin:0;font-size:14px;line-height:1.6;color:var(--muted);max-width:62ch">{{ t.codesIntro }}</p>
             <div style="min-width:0;display:flex;flex-direction:column">
@@ -210,7 +210,7 @@ a:hover{color:var(--ink)}
       </sc-if>
     <sc-if value="{{ showBlogs }}" hint-placeholder-val="{{ true }}">
       <aside style="flex:1 1 280px;min-width:0;border-top:1px solid var(--ink);padding-top:22px;display:flex;flex-direction:column;gap:20px">
-        <h2 style="margin:0;font-family:'Inter',system-ui,sans-serif;font-weight:500;font-size:34px;line-height:1"><span style="width:32px;height:3px;background:var(--ecb);display:block;margin-bottom:12px"></span><button onClick="{{ toggleBlogs }}" aria-expanded="{{ expBlogs }}" tabindex="{{ tabIdx }}" style="{{ hdr }}"><span>Blogs &amp; reading</span><span aria-hidden="true" style="font-family:'Inter',system-ui,sans-serif;font-weight:500;font-size:20px;color:var(--link)">{{ indBlogs }}</span></button></h2>
+        <h2 style="margin:0;font-family:'Inter',system-ui,sans-serif;font-weight:500;font-size:34px;line-height:1"><span style="width:32px;height:3px;background:var(--ecb);display:block;margin-bottom:12px"></span><button onClick="{{ toggleBlogs }}" aria-expanded="{{ expBlogs }}" tabindex="{{ tabIdx }}" style="{{ hdr }}"><span>{{ t.blogsTitle }}</span><span aria-hidden="true" style="font-family:'Inter',system-ui,sans-serif;font-weight:500;font-size:20px;color:var(--link)">{{ indBlogs }}</span></button></h2>
         <sc-if value="{{ openBlogs }}" hint-placeholder-val="{{ true }}">
           <p style="margin:0;font-size:14px;line-height:1.6;color:var(--muted);text-wrap:pretty">{{ t.blogsIntro }}</p>
           <div style="display:flex;flex-direction:column">
