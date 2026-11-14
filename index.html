@@ -139,11 +139,16 @@ a:hover{color:var(--ink)}
                     <a href="{{ l.url }}" target="_blank" style="color:var(--link)">{{ l.label }} ↗</a>
                   </sc-for>
                 </div>
+                <sc-if value="{{ inlineChart }}" hint-placeholder-val="{{ false }}">
+                  <a href="{{ it.chartUrl }}" target="_blank" aria-label="Open chart" style="{{ chartCell }}" style-hover="border-color:var(--ecb)">
+                    <img src="{{ it.chartUrl }}" onError="{{ chartFail }}" alt="Chart: {{ it.title }}" loading="lazy" style="display:block;width:100%;aspect-ratio:4/3;object-fit:contain">
+                  </a>
+                </sc-if>
                 <sc-if value="{{ it.open }}" hint-placeholder-val="{{ false }}">
                   <p style="margin:6px 0 0;padding-left:16px;border-left:2px solid var(--ecb);font-size:15px;line-height:1.7;color:var(--soft);max-width:70ch;text-wrap:pretty">{{ it.abstract }}</p>
                 </sc-if>
               </div>
-              <sc-if value="{{ showCharts }}" hint-placeholder-val="{{ true }}">
+              <sc-if value="{{ sideChart }}" hint-placeholder-val="{{ true }}">
                 <a href="{{ it.chartUrl }}" target="_blank" aria-label="Open chart" style="{{ chartCell }}" style-hover="border-color:var(--ecb)">
                   <img src="{{ it.chartUrl }}" onError="{{ chartFail }}" alt="Chart: {{ it.title }}" loading="lazy" style="display:block;width:100%;aspect-ratio:4/3;object-fit:contain">
                 </a>
@@ -408,8 +413,9 @@ class Component extends DCLogic {
     const latest = R.length ? [...R[1].items.slice(0, 3).map(i => ({ ...i, kind: 'Policy' })), { ...R[0].items[0], kind: 'Journal' }] : [];
     return {
       homeLinks: (D.homeLinks || []).filter(x => !x.hidden).map(x => x.ref === 'cv' ? { ...x, url: '#cv', target: '_self', go: this.go('cv') } : { ...x, url: x.url || D[x.ref], target: '_blank', go: undefined }).filter(x => x.url),
-      cvUrl, cvEmbed: cvUrl + '#view=FitH', showCharts: D.showCharts !== false, artCols: this.state.phone ? '48px minmax(0,1fr)' : '60px minmax(0,1fr) clamp(170px,24%,270px)',
-      chartCell: 'display:block;background:var(--surface);border:1px solid var(--rule);align-self:start;margin-top:4px;' + (this.state.phone ? 'grid-column:2;grid-row:2;max-width:360px' : 'grid-column:3;grid-row:1'),
+      cvUrl, cvEmbed: cvUrl + '#view=FitH', showCharts: D.showCharts !== false, sideChart: D.showCharts !== false && !narrow, inlineChart: D.showCharts !== false && narrow, artCols: narrow ? (this.state.phone ? '48px' : '60px') + ' minmax(0,1fr)' : '60px minmax(0,1fr) clamp(170px,24%,270px)',
+      // Wide: chart sits in a third column. Narrow (<1000 px): chart sits inside the text column, just before the abstract, so the text keeps the full width.
+      chartCell: 'display:block;background:var(--surface);border:1px solid var(--rule);align-self:start;' + (narrow ? 'max-width:360px;margin-top:4px' : 'margin-top:4px;grid-column:3;grid-row:1'),
       chartFail: e => { const i = e.target; if (i.dataset.f) return; i.dataset.f = '1'; i.src = 'charts/placeholder.svg'; },
       contacts,
       pos: { home: pf('home', '50% 50%'), research: pf('research', '50% 50%'), resources: pf('resources', '50% 50%'), contacts: pf('contacts', '50% 50%'), portrait: pf('portrait', '50% 18%') },
