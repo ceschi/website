@@ -28,7 +28,7 @@ site/
   fonts/            the Inter font files and its licence (do not delete the licence)
   vendor/           React, the library the page runs on
   papers/           your PDFs and slides (add them here); cv.pdf is your CV
-  charts/           chart images for the research entries; placeholder.svg is the grey default
+  charts/           chart images for the research entries; placeholder.svg is only shown for a wrong file name
   build-info.js     filled in automatically at deployment (section 9.3). Do not edit.
   .github/workflows/pages.yml   the automatic deployment (section 9.3)
   CLAUDE.md         notes for Claude Code (not published)
@@ -444,7 +444,7 @@ GoatCounter (free for non-commercial use), Plausible, Umami (self-hosted) and Cl
 
 ### 9.1 Charts next to research entries
 
-Every research entry has a chart cell on its right (on a screen narrower than 1000 px it moves into the text column, just before the abstract). Until you give an entry a chart, it shows a grey placeholder.
+Every research entry has a chart cell on its right (on a screen narrower than 1000 px it moves into the text column, just before the abstract). An entry without a `chart` field shows nothing: no frame, no placeholder, and its text uses the full width.
 
 To add a chart to an entry:
 
@@ -455,7 +455,7 @@ To add a chart to an entry:
 {year:'2022',topics:[...],title:'...',url:'...',chart:'taylor-rule.png',venue:'...'},
 ```
 
-Clicking a chart opens the full image in a new tab. A wrong file name falls back to the placeholder instead of a broken image. To replace a chart later, overwrite the file with the same name. To hide every chart, set `showCharts: false` near the top of `site-data.js`. To change the placeholder, replace `charts/placeholder.svg`.
+Clicking a chart opens the full image in a new tab. A wrong file name shows the grey placeholder instead of a broken image. To replace a chart later, overwrite the file with the same name. To hide every chart, set `showCharts: false` near the top of `site-data.js`. To change the placeholder used for wrong file names, replace `charts/placeholder.svg`.
 
 ### 9.2 CV page
 

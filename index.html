@@ -120,7 +120,7 @@ a:hover{color:var(--ink)}
           <sc-for list="{{ g.items }}" as="it" hint-placeholder-count="2">
             <article style="display:grid;grid-template-columns:{{ artCols }};gap:16px 28px;padding:0 0 26px;margin-bottom:24px;border-bottom:1px solid var(--rule)">
               <span style="font-family:'Inter',system-ui,sans-serif;font-weight:500;font-size:12.5px;color:var(--link);padding-top:6px">{{ it.yearLabel }}</span>
-              <div style="display:flex;flex-direction:column;gap:10px;min-width:0">
+              <div style="display:flex;flex-direction:column;gap:10px;min-width:0;grid-column:{{ it.textCol }}">
                 <sc-if value="{{ it.url }}" hint-placeholder-val="{{ true }}">
                   <a href="{{ it.url }}" target="_blank" style="font-family:'Inter',system-ui,sans-serif;font-weight:500;font-size:27px;line-height:1.1;color:var(--ink);text-wrap:pretty" style-hover="color:var(--link)">{{ it.title }}</a>
                 </sc-if>
@@ -139,20 +139,20 @@ a:hover{color:var(--ink)}
                     <a href="{{ l.url }}" target="_blank" style="color:var(--link)">{{ l.label }} ↗</a>
                   </sc-for>
                 </div>
-                <sc-if value="{{ inlineChart }}" hint-placeholder-val="{{ false }}">
+                <sc-if value="{{ inlineChart }}" hint-placeholder-val="{{ false }}"><sc-if value="{{ it.hasChart }}" hint-placeholder-val="{{ true }}">
                   <a href="{{ it.chartUrl }}" target="_blank" aria-label="Open chart" style="{{ chartCell }}" style-hover="border-color:var(--ecb)">
                     <img src="{{ it.chartUrl }}" onError="{{ chartFail }}" alt="Chart: {{ it.title }}" loading="lazy" style="display:block;width:100%;aspect-ratio:4/3;object-fit:contain">
                   </a>
-                </sc-if>
+                </sc-if></sc-if>
                 <sc-if value="{{ it.open }}" hint-placeholder-val="{{ false }}">
                   <p style="margin:6px 0 0;padding-left:16px;border-left:2px solid var(--ecb);font-size:15px;line-height:1.7;color:var(--soft);max-width:70ch;text-wrap:pretty">{{ it.abstract }}</p>
                 </sc-if>
               </div>
-              <sc-if value="{{ sideChart }}" hint-placeholder-val="{{ true }}">
+              <sc-if value="{{ sideChart }}" hint-placeholder-val="{{ true }}"><sc-if value="{{ it.hasChart }}" hint-placeholder-val="{{ true }}">
                 <a href="{{ it.chartUrl }}" target="_blank" aria-label="Open chart" style="{{ chartCell }}" style-hover="border-color:var(--ecb)">
                   <img src="{{ it.chartUrl }}" onError="{{ chartFail }}" alt="Chart: {{ it.title }}" loading="lazy" style="display:block;width:100%;aspect-ratio:4/3;object-fit:contain">
                 </a>
-              </sc-if>
+              </sc-if></sc-if>
             </article>
           </sc-for>
           </div>
@@ -387,7 +387,7 @@ class Component extends DCLogic {
     const topicChips = ['all', ...D.topics].map(t => ({ label: t === 'all' ? 'All' : t, on: topic === t, style: chip(topic === t), go: () => this.setState({ topic: t }) }));
     const build = s => s.items.map((it, i) => ({ it, id: s.key + i })).filter(({ it }) => !it.hidden && (topic === 'all' || (it.topics || []).includes(topic))).map(({ it, id }) => {
       const isOpen = open[id] ?? allOpen;
-      return { ...it, url: stamp(it.url), chartUrl: it.chart ? (loc(it.chart) && it.chart.indexOf('/') < 0 ? 'charts/' + it.chart : it.chart) : 'charts/placeholder.svg', yearLabel: it.year || '—', noUrl: !it.url, links: (it.links || []).map(l => ({ ...l, url: stamp(l.url) })), open: !!(it.abstract && isOpen), toggleLabel: isOpen ? 'Hide abstract −' : 'Abstract +', toggle: () => this.setState(st => ({ open: { ...st.open, [id]: !isOpen } })) };
+      return { ...it, url: stamp(it.url), hasChart: !!it.chart, chartUrl: it.chart ? (loc(it.chart) && it.chart.indexOf('/') < 0 ? 'charts/' + it.chart : it.chart) : '', textCol: it.chart && D.showCharts !== false && !this.state.narrow ? '2' : '2 / -1', yearLabel: it.year || '—', noUrl: !it.url, links: (it.links || []).map(l => ({ ...l, url: stamp(l.url) })), open: !!(it.abstract && isOpen), toggleLabel: isOpen ? 'Hide abstract −' : 'Abstract +', toggle: () => this.setState(st => ({ open: { ...st.open, [id]: !isOpen } })) };
     });
     // Sections flagged hidden:true in site-data.js are skipped everywhere.
     const byKey = k => D.research.find(s => s.key === k && !s.hidden);
