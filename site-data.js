@@ -69,11 +69,11 @@ text: {
 // Links under the bio on the home page. "ref" takes the address from the top of this file
 // (repec, cv, twitter, linkedin, github). Hide a link with hidden:true.
 homeLinks: [
- {label:"IDEAS RePEc ↗", ref:"repec"},
+ {label:"IDEAS RePEc", ref:"repec"},
  {label:"CV", ref:"cv"},
- {label:"X / Twitter ↗", ref:"twitter"},
- {label:"LinkedIn ↗", ref:"linkedin"},
- {label:"GitHub ↗", ref:"github"},
+ {label:"X / Twitter", ref:"twitter"},
+ {label:"LinkedIn", ref:"linkedin"},
+ {label:"GitHub", ref:"github"},
 ],
 // Privacy notice shown at #privacy and linked from the cookie notice and the footer.
 // TEMPLATE: replace every [BRACKET] and have the text checked for your situation before publishing.
