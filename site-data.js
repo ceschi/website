@@ -16,7 +16,7 @@
 window.SITE_DATA = {
 // Fallback date for the footer label. When the site is deployed by the GitHub workflow, the label is set
 // automatically from the date of the last commit and this value is ignored.
-updated: '2025/11/08',
+updated: '2026/11/14',
 // Your CV: replace the file papers/cv.pdf with your own (same name). The CV button opens a page that shows it.
 cv: 'papers/cv.pdf',
 // Charts next to every research entry. true = show, false = hide all of them.
@@ -29,17 +29,17 @@ linkedin: 'https://www.linkedin.com/in/emanuele-franceschi-151263235',
 // 0% = left / top edge of the picture, 50% = centre, 100% = right / bottom edge.
 // Example: '50% 80%' shows more of the lower part, '50% 20%' more of the upper part.
 // Pictures are cropped differently on a laptop (wide strip) and a phone (tall strip), so there are two lists.
-imageFocus: {home:'50% 50%', research:'50% 50%', resources:'50% 50%', contacts:'50% 50%', portrait:'50% 18%'},
+imageFocus: {home:'50% 50%', research:'50% 60%', resources:'50% 50%', contacts:'50% 20%', portrait:'50% 18%'},
 imageFocusPhone: {home:'50% 50%', research:'50% 50%', resources:'50% 50%', contacts:'50% 50%', portrait:'50% 18%'},
 show: {data:true, codes:true, blogs:true},
 // Google Analytics measurement ID. Replace G-XXXXXXXXXX with your real ID (looks like G-AB12CD34EF).
 // While it is the placeholder, the cookie notice is shown but nothing is sent to Google.
 // Set it to '' (empty) to remove tracking and the cookie notice altogether.
-analyticsId: 'G-XXXXXXXXXX',
+analyticsId: 'G-1DYBL8BMW0',
 // General texts of the site. Edit the quoted text only.
 text: {
- homeRole: "Economist · European Central Bank · Frankfurt",
- homeTagline: "Financial stability, macro-finance and monetary policy.",
+ homeRole: "Economist · European Central Bank",
+ homeTagline: "Financial stability, macro-finance, and monetary policy.",
  homeBio: "I am a Financial Stability Expert (Economist) in the ECB’s Directorate General for Macroprudential Policy and Financial Stability. In 2021 I received my PhD from the Paris School of Economics and Paris 1 Panthéon-Sorbonne. This is my personal site, where I post updates and material about my research.",
  homeDisclaimer: "This is my private site; the views expressed do not necessarily reflect those of the European Central Bank or the Eurosystem.",
  dataIntro: "Open-access sources, many with APIs.",
@@ -79,7 +79,7 @@ privacy: {
   {
    "h": "Who is responsible",
    "paras": [
-    "[YOUR FULL NAME], [POSTAL ADDRESS], [COUNTRY]. To contact me, use the details on the Contacts page of this site."
+    "Emanuele Franceschi, Germany. To contact me, use the details on the Contacts page of this site."
    ]
   },
   {
