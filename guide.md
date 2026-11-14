@@ -115,6 +115,8 @@ All fields except `title` are optional. Leave a field out and it does not appear
 
 Remove `hidden:true,` to show it again. Works for research entries, data, codes, blogs and contacts.
 
+**Hide a whole research section**: add `hidden:true,` to the section line (`{key:'pub', title:'Publications', items:[`), e.g. `{key:'other', hidden:true, title:'Other', items:[`. The section and its filter button disappear. Remove `hidden:true,` to show it again. The sections "In progress" and "Longer-term" are shown together as "Work in progress": hide both to remove that block and the "Ongoing" button.
+
 **Comment out** an entry: put `//` at the start of its line.
 
 ```js

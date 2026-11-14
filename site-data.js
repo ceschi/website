@@ -13,6 +13,9 @@
 // ADD an entry: copy a line in the same list, then change the text and the link.
 //
 // Resources page sections: set to false to hide a whole section.
+// Research page sections: add hidden:true to the section line, e.g.
+//   {key:'other',title:'Other',hidden:true,items:[
+// Its filter button disappears too. Remove hidden:true to show it again.
 window.SITE_DATA = {
 // Fallback date for the footer label. When the site is deployed by the GitHub workflow, the label is set
 // automatically from the date of the last commit and this value is ignored.

@@ -375,16 +375,20 @@ class Component extends DCLogic {
     const dark = this.state.dark ?? (this.props.darkDefault ?? true);
     const nav = PAGES.filter(p => !p[2]).map(([k, label]) => ({ label, href: '#' + k, go: this.go(k), style: { padding: '7px 12px', fontSize: 14, fontWeight: 500, color: page === k ? 'var(--ink)' : 'var(--muted)', whiteSpace: 'nowrap', flex: 'none', boxShadow: page === k ? 'inset 0 -2px 0 var(--ecb)' : 'none' } }));
     const chip = on => ({ font: "400 14px 'Inter',system-ui,sans-serif", padding: '3px 0', cursor: 'pointer', border: 0, borderBottom: '1px solid ' + (on ? 'var(--ecb)' : 'transparent'), background: 'transparent', color: on ? 'var(--ink)' : 'var(--muted)' });
-    const typeChips = [['all','All'],['pub','Publications'],['policy','Policy'],['wip','Ongoing'],['other','Other']].map(([k, label]) => ({ label, on: type === k, style: chip(type === k), go: () => this.setState({ type: k }) }));
+    const typeChips = [['all','All'],['pub','Publications'],['policy','Policy'],['wip','Ongoing'],['other','Other']]
+      // A chip for a hidden section would lead to an empty page, so drop it. 'wip' covers two sections (wip + long).
+      .filter(([k]) => k === 'all' || D.research.some(s => !s.hidden && (k === 'wip' ? s.key === 'wip' || s.key === 'long' : s.key === k)))
+      .map(([k, label]) => ({ label, on: type === k, style: chip(type === k), go: () => this.setState({ type: k }) }));
     const topicChips = ['all', ...D.topics].map(t => ({ label: t === 'all' ? 'All' : t, on: topic === t, style: chip(topic === t), go: () => this.setState({ topic: t }) }));
     const build = s => s.items.map((it, i) => ({ it, id: s.key + i })).filter(({ it }) => !it.hidden && (topic === 'all' || (it.topics || []).includes(topic))).map(({ it, id }) => {
       const isOpen = open[id] ?? allOpen;
       return { ...it, url: stamp(it.url), chartUrl: it.chart ? (loc(it.chart) && it.chart.indexOf('/') < 0 ? 'charts/' + it.chart : it.chart) : 'charts/placeholder.svg', yearLabel: it.year || '—', noUrl: !it.url, links: (it.links || []).map(l => ({ ...l, url: stamp(l.url) })), open: !!(it.abstract && isOpen), toggleLabel: isOpen ? 'Hide abstract −' : 'Abstract +', toggle: () => this.setState(st => ({ open: { ...st.open, [id]: !isOpen } })) };
     });
-    const byKey = k => D.research.find(s => s.key === k);
+    // Sections flagged hidden:true in site-data.js are skipped everywhere.
+    const byKey = k => D.research.find(s => s.key === k && !s.hidden);
     const wipGroups = [['wip', 'In progress'], ['long', 'Longer-term']].map(([k, label]) => byKey(k) ? { label, items: build(byKey(k)) } : null).filter(g => g && g.items.length);
-    const sections = D.research.filter(s => s.key !== 'long' && s.key !== 'wip' && (type === 'all' || s.key === type)).map(s => ({ key: s.key, title: s.title, groups: [{ label: '', items: build(s) }] }));
-    if (byKey('wip') && (type === 'all' || type === 'wip')) {
+    const sections = D.research.filter(s => !s.hidden && s.key !== 'long' && s.key !== 'wip' && (type === 'all' || s.key === type)).map(s => ({ key: s.key, title: s.title, groups: [{ label: '', items: build(s) }] }));
+    if ((byKey('wip') || byKey('long')) && (type === 'all' || type === 'wip')) {
       const at = sections.findIndex(s => s.key === 'other');
       sections.splice(at < 0 ? sections.length : at, 0, { key: 'wip', title: 'Work in progress', groups: wipGroups });
     }
