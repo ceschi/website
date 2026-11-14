@@ -28,13 +28,14 @@ showCharts: true,
 repec: 'https://ideas.repec.org/f/pfr425.html',
 twitter: 'https://twitter.com/emafraschi',
 linkedin: 'https://www.linkedin.com/in/emanuele-franceschi-151263235',
+github: 'https://github.com/ceschi',
 // Which part of each picture stays visible when it is cropped. Two numbers: "horizontal% vertical%".
 // 0% = left / top edge of the picture, 50% = centre, 100% = right / bottom edge.
 // Example: '50% 80%' shows more of the lower part, '50% 20%' more of the upper part.
 // Pictures are cropped differently on a laptop (wide strip) and a phone (tall strip), so there are two lists.
 imageFocus: {home:'50% 50%', research:'50% 60%', resources:'50% 50%', contacts:'50% 20%', portrait:'50% 18%'},
 imageFocusPhone: {home:'50% 50%', research:'50% 50%', resources:'50% 50%', contacts:'50% 50%', portrait:'50% 18%'},
-show: {data:true, codes:true, blogs:true},
+show: {data:false, codes:false, blogs:true},
 // Google Analytics measurement ID. Replace G-XXXXXXXXXX with your real ID (looks like G-AB12CD34EF).
 // While it is the placeholder, the cookie notice is shown but nothing is sent to Google.
 // Set it to '' (empty) to remove tracking and the cookie notice altogether.
@@ -66,12 +67,13 @@ text: {
  blogsIntro: "Websites and blogs on economics, scientific and non-specialist alike.",
 },
 // Links under the bio on the home page. "ref" takes the address from the top of this file
-// (repec, cv, twitter, linkedin). Hide a link with hidden:true.
+// (repec, cv, twitter, linkedin, github). Hide a link with hidden:true.
 homeLinks: [
- {label:"IDEAS RePEc ↗", ref:"repec"},
+ {label:"IDEAS RePEc", ref:"repec"},
  {label:"CV", ref:"cv"},
- {label:"X / Twitter ↗", ref:"twitter"},
- {label:"LinkedIn ↗", ref:"linkedin"},
+ {label:"X / Twitter", ref:"twitter"},
+ {label:"LinkedIn", ref:"linkedin"},
+ {label:"GitHub", ref:"github"},
 ],
 // Privacy notice shown at #privacy and linked from the cookie notice and the footer.
 // TEMPLATE: replace every [BRACKET] and have the text checked for your situation before publishing.
@@ -204,5 +206,6 @@ contacts: [
  {label:"RePEc", value:"IDEAS RePEc profile", ref:"repec", target:"_blank"},
  {label:"X / Twitter", value:"@emafraschi", ref:"twitter", target:"_blank"},
  {label:"LinkedIn", value:"LinkedIn profile", ref:"linkedin", target:"_blank"},
+ {label:"GitHub", value:"github.com/ceschi", ref:"github", target:"_blank"},
 ]
 };
