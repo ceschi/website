@@ -131,9 +131,6 @@ a:hover{color:var(--ink)}
                   <sc-if value="{{ it.venue }}" hint-placeholder-val="{{ true }}"><span style="color:var(--soft)">{{ it.venue }}</span></sc-if>
                   <sc-if value="{{ it.with }}" hint-placeholder-val="{{ true }}"><span>with {{ it.with }}</span></sc-if>
                 </div>
-                <sc-if value="{{ it.summary }}" hint-placeholder-val="{{ true }}">
-                  <p style="margin:0;font-size:16px;line-height:1.55;color:var(--soft);max-width:62ch;text-wrap:pretty">{{ it.summary }}</p>
-                </sc-if>
                 <div style="display:flex;gap:16px;flex-wrap:wrap;align-items:center;font-size:13px;font-weight:500">
                   <sc-if value="{{ it.abstract }}" hint-placeholder-val="{{ true }}">
                     <button onClick="{{ it.toggle }}" style="font:500 13px 'Inter',system-ui,sans-serif;padding:0 0 2px;border:0;border-bottom:1px solid var(--line);background:none;color:var(--ink);cursor:pointer" style-hover="border-color:var(--link)">{{ it.toggleLabel }}</button>
