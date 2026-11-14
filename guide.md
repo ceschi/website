@@ -142,7 +142,7 @@ show: {data:true, codes:false, blogs:true},
 
 ### 3.6 Links under the bio on the home page
 
-The block `homeLinks: [ ... ]` in `site-data.js` lists them: IDEAS RePEc, CV, X / Twitter and LinkedIn. The CV link opens the CV page of the site (section 9.2) and the other links open in a new tab. Each line has a `label` (the text shown) and `ref`, the name of an address defined at the top of the file (`repec`, `cv`, `twitter`, `linkedin`). The same addresses feed the Contacts page, so you change each one in one place. A line can also have its own `url` instead of `ref`. Add, hide (`hidden:true`), comment out or delete lines as in 3.4.
+The block `homeLinks: [ ... ]` in `site-data.js` lists them: IDEAS RePEc, CV, X / Twitter, LinkedIn and GitHub. The CV link opens the CV page of the site (section 9.2) and the other links open in a new tab. Each line has a `label` (the text shown) and `ref`, the name of an address defined at the top of the file (`repec`, `cv`, `twitter`, `linkedin`, `github`). The same addresses feed the Contacts page, so you change each one in one place. A line can also have its own `url` instead of `ref`. Add, hide (`hidden:true`), comment out or delete lines as in 3.4.
 
 The LinkedIn address (`linkedin:` near the top) is a placeholder until you replace it.
 
