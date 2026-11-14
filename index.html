@@ -270,16 +270,16 @@ a:hover{color:var(--ink)}
   <main style="max-width:1240px;width:100%;box-sizing:border-box;margin:0 auto;padding:48px clamp(18px,5vw,32px) 96px;display:flex;flex-direction:column">
     <sc-for list="{{ contacts }}" as="c" hint-placeholder-count="4">
       <sc-if value="{{ c.isLink }}" hint-placeholder-val="{{ true }}">
-        <a href="{{ c.url }}" target="{{ c.target }}" style="display:grid;grid-template-columns:minmax(90px,200px) minmax(0,1fr) auto;gap:20px;align-items:baseline;padding:22px 0;border-bottom:1px solid var(--rule);color:var(--ink)" style-hover="color:var(--link)">
-          <span style="font-family:'Inter',system-ui,sans-serif;font-weight:500;font-size:12px;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted)">{{ c.label }}</span>
-          <span style="font-family:'Inter',system-ui,sans-serif;font-weight:500;font-size:clamp(24px,3.4vw,44px);line-height:1.1;overflow-wrap:anywhere">{{ c.value }}</span>
+        <a href="{{ c.url }}" target="{{ c.target }}" style="display:grid;grid-template-columns:{{ cCols }};gap:{{ cGap }};align-items:baseline;padding:22px 0;border-bottom:1px solid var(--rule);color:var(--ink)" style-hover="color:var(--link)">
+          <span style="{{ cLabel }}">{{ c.label }}</span>
+          <span style="font-family:'Inter',system-ui,sans-serif;font-weight:500;font-size:{{ cFont }};line-height:1.1;overflow-wrap:anywhere">{{ c.value }}</span>
           <span style="color:var(--link);font-size:20px">→</span>
         </a>
       </sc-if>
       <sc-if value="{{ c.isEmail }}" hint-placeholder-val="{{ false }}">
-        <div style="display:grid;grid-template-columns:minmax(90px,200px) minmax(0,1fr) auto;gap:20px;align-items:baseline;padding:22px 0;border-bottom:1px solid var(--rule);color:var(--ink)">
-          <span style="font-family:'Inter',system-ui,sans-serif;font-weight:500;font-size:12px;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted)">{{ c.label }}</span>
-          <sc-if value="{{ c.isShown }}" hint-placeholder-val="{{ false }}"><a href="{{ c.mailto }}" style="font-family:'Inter',system-ui,sans-serif;font-weight:500;font-size:clamp(24px,3.4vw,44px);line-height:1.1;overflow-wrap:anywhere;color:var(--ink)" style-hover="color:var(--link)">{{ c.address }}</a></sc-if>
+        <div style="display:grid;grid-template-columns:{{ cCols }};gap:{{ cGap }};align-items:baseline;padding:22px 0;border-bottom:1px solid var(--rule);color:var(--ink)">
+          <span style="{{ cLabel }}">{{ c.label }}</span>
+          <sc-if value="{{ c.isShown }}" hint-placeholder-val="{{ false }}"><a href="{{ c.mailto }}" style="font-family:'Inter',system-ui,sans-serif;font-weight:500;font-size:{{ cFont }};line-height:1.1;overflow-wrap:anywhere;color:var(--ink)" style-hover="color:var(--link)">{{ c.address }}</a></sc-if>
           <sc-if value="{{ c.isHidden }}" hint-placeholder-val="{{ true }}"><button onClick="{{ c.reveal }}" style="justify-self:start;font:500 clamp(18px,2vw,24px) 'Inter',system-ui,sans-serif;color:var(--link);background:none;border:0;border-bottom:1px dashed var(--link);padding:0 0 3px;cursor:pointer;text-align:left">{{ t.showEmail }}</button></sc-if>
           <span style="color:var(--link);font-size:20px">{{ c.arrow }}</span>
         </div>
@@ -416,6 +416,9 @@ class Component extends DCLogic {
       cvUrl, cvEmbed: cvUrl + '#view=FitH', showCharts: D.showCharts !== false, sideChart: D.showCharts !== false && !narrow, inlineChart: D.showCharts !== false && narrow, artCols: narrow ? (this.state.phone ? '48px' : '60px') + ' minmax(0,1fr)' : '60px minmax(0,1fr) clamp(170px,24%,270px)',
       // Wide: chart sits in a third column. Narrow (<1000 px): chart sits inside the text column, just before the abstract, so the text keeps the full width.
       chartCell: 'display:block;background:var(--surface);border:1px solid var(--rule);align-self:start;' + (narrow ? 'max-width:360px;margin-top:4px' : 'margin-top:4px;grid-column:3;grid-row:1'),
+      // Contact rows: font scales with viewport (18 px phone to 30 px laptop). On phone the label stacks above the value so the value keeps the full width.
+      cFont: 'clamp(18px,3.2vw,30px)', cCols: this.state.phone ? 'minmax(0,1fr) auto' : 'minmax(90px,200px) minmax(0,1fr) auto', cGap: this.state.phone ? '6px 12px' : '20px',
+      cLabel: "font-family:'Inter',system-ui,sans-serif;font-weight:500;font-size:12px;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted)" + (this.state.phone ? ';grid-column:1/-1' : ''),
       chartFail: e => { const i = e.target; if (i.dataset.f) return; i.dataset.f = '1'; i.src = 'charts/placeholder.svg'; },
       contacts,
       pos: { home: pf('home', '50% 50%'), research: pf('research', '50% 50%'), resources: pf('resources', '50% 50%'), contacts: pf('contacts', '50% 50%'), portrait: pf('portrait', '50% 18%') },
