@@ -443,7 +443,7 @@ GoatCounter (free for non-commercial use), Plausible, Umami (self-hosted) and Cl
 
 ### 9.1 Charts next to research entries
 
-Every research entry has a chart cell on its right (under the text on a phone). Until you give an entry a chart, it shows a grey placeholder.
+Every research entry has a chart cell on its right (on a screen narrower than 1000 px it moves into the text column, just before the abstract). Until you give an entry a chart, it shows a grey placeholder.
 
 To add a chart to an entry:
 
