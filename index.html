@@ -306,7 +306,7 @@ a:hover{color:var(--ink)}
 </sc-if>
 </div>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props="{&quot;darkDefault&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Look&quot;},&quot;abstractsOpen&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Research&quot;}}">
+<script type="text/x-dc" data-dc-script data-props="{&quot;darkDefault&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Look&quot;},&quot;abstractsOpen&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Research&quot;}}">
 const PAGES = [['home','Home'],['research','Research'],['resources','Resources'],['cv','CV'],['contacts','Contacts'],['privacy','Privacy',true]];
 const EMPTY = { research: [], data: [], codes: [], blogs: [], contacts: [], topics: [] };
 class Component extends DCLogic {
@@ -371,7 +371,7 @@ class Component extends DCLogic {
     const isOpen_ = k => !narrow || !closed[k];
     const hdr = { font: 'inherit', color: 'inherit', background: 'none', border: 0, padding: 0, width: '100%', textAlign: 'left', display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', gap: 12, cursor: narrow ? 'pointer' : 'default' };
     const ind = k => narrow ? (closed[k] ? '+' : '−') : '';
-    const allOpen = this.props.abstractsOpen ?? false;
+    const allOpen = this.props.abstractsOpen ?? true;
     const dark = this.state.dark ?? (this.props.darkDefault ?? true);
     const nav = PAGES.filter(p => !p[2]).map(([k, label]) => ({ label, href: '#' + k, go: this.go(k), style: { padding: '7px 12px', fontSize: 14, fontWeight: 500, color: page === k ? 'var(--ink)' : 'var(--muted)', whiteSpace: 'nowrap', flex: 'none', boxShadow: page === k ? 'inset 0 -2px 0 var(--ecb)' : 'none' } }));
     const chip = on => ({ font: "400 14px 'Inter',system-ui,sans-serif", padding: '3px 0', cursor: 'pointer', border: 0, borderBottom: '1px solid ' + (on ? 'var(--ecb)' : 'transparent'), background: 'transparent', color: on ? 'var(--ink)' : 'var(--muted)' });

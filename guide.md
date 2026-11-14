@@ -80,7 +80,7 @@ Entries live in `research:`, in five groups: `pub` (Publications), `policy` (Pol
 ```js
 {year:'2022', topics:['Inflation'], title:'Paper title', url:'papers/paper.pdf',
  venue:'Journal name', with:'A. Coauthor and B. Coauthor',
- abstract:'Full abstract, shown when clicking "Abstract +".',
+ abstract:'Full abstract, shown under the entry; the "Hide abstract" button collapses it.',
  links:[{label:'Slides', url:'papers/slides.pdf'}]},
 ```
 
