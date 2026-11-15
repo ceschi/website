@@ -161,7 +161,7 @@ research: [
   {hidden: true, year:'',topics:['Inflation','Monetary policy'],title:'Sectoral inflation and optimal monetary policy'},
   {hidden: true, year:'',topics:['Monetary policy'],title:'ML-VAR: a machine learning approach to time-series macroeconometrics'}]},
  {key:'other',title:'Other',items:[
-  {year:'2015',topics:['Integration & growth'],chart:'placeholder.svg',title:'Effects of labour market frictions and knowledge spillover on structural change',venue:'ETE Master’s thesis, supervised by Prof. F. Coricelli',abstract:'A simple two-sector model accounts for the effect of labour market frictions and sectoral productivity differentials on structural change dynamics, intended as the industry labour share.'}]}
+  {year:'2015',topics:['Integration & growth'],title:'Effects of labour market frictions and knowledge spillover on structural change',venue:'ETE Master’s thesis, supervised by Prof. F. Coricelli',abstract:'A simple two-sector model accounts for the effect of labour market frictions and sectoral productivity differentials on structural change dynamics, intended as the industry labour share.'}]}
 ],
 data: [
  {name:"ECB Data Portal",desc:"Macro, monetary, and financial data on the euro area.",url:"https://data.ecb.europa.eu"},
