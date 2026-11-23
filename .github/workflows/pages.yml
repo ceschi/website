@@ -22,7 +22,7 @@ jobs:
       - name: Copy the site files (notes and workflow stay out of the published site)
         run: |
           mkdir _site
-          rsync -a --exclude='.git' --exclude='.github' --exclude='_site' --exclude='CLAUDE.md' --exclude='guide.md' ./ _site/
+          rsync -a --exclude='.git' --exclude='.github' --exclude='_site' --exclude='CLAUDE.md' --exclude='guide.md' --exclude='README.md' ./ _site/
       - name: Write build info (date of the last commit, short commit id)
         run: |
           D=$(TZ=Europe/Berlin git log -1 --format=%cd --date=format-local:%Y/%m/%d)
@@ -31,5 +31,9 @@ jobs:
       - uses: actions/upload-pages-artifact@v5
         with:
           path: _site
+      # deploy-pages sometimes looks for the artifact less than a second after the upload
+      # and finds none (GitHub-side delay), so wait a little before deploying.
+      - name: Wait for the artifact to become visible
+        run: sleep 20
       - id: deployment
         uses: actions/deploy-pages@v5
